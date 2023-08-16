@@ -7,7 +7,6 @@ To run the script, make sure your environment has the requirements
 of `requirements_interactive.txt` installed.
 """
 #%%
-
 # Preparations ---
 import numpy as np
 import pandas as pd
@@ -22,10 +21,10 @@ from utilities.plot_helper import (PARTICLE_TYPES, CenterOfMassConfiguration,
 plotly.io.renderers.default = "notebook_connected"
 
 # Hack for rendering LaTeX in VSCode (see https://github.com/microsoft/vscode-jupyter/issues/8131#issuecomment-1589961116)
-# from IPython.display import display, HTML
-# display(HTML(
-#     '<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_SVG"></script>'
-# ))
+from IPython.display import display, HTML
+display(HTML(
+    '<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_SVG"></script>'
+))
 
 # Import Data ---
 data = import_collider_data()
@@ -106,6 +105,7 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> go.Figure:
     )
     return fig
 
+#%%
 # Plotting ---
 # Here, the plotting is performed for Center-of-Mass and Luminosity timelines.
 
