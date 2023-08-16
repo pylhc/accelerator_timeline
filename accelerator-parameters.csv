@@ -1,0 +1,61 @@
+Name,Institute,Country,Start,End,Type,Energy,Energy B2,Luminosity max peak,Length,References
+,,,,,,[GeV],[GeV],[cm^-2s^-1],[m],
+PS,CERN,Switzerland,1959,,p+,28,,,628.3,https://cds.cern.ch/record/340514/files/p29.pdf
+AdA,LNF,Italy,1964,1964,e+e-,0.25,,1E+025,4.1,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+VEP-1,INP,Russia,1964,1968,e-e-,0.16,,5E+027,2.7,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+CBX,Princeton-Stanford,USA,1965,1968,e-e-,0.5,,2E+028,11.8,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+VEPP-2,INP,Russia,1966,1970,e+e-,0.67,,4E+028,11.5,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+ACO,LAL,France,1967,1972,e+e-,0.54,,1E+029,22,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+ADONE,LNF,Italy,1969,1993,e+e-,1.5,,6E+029,105,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+CEA,Cambridge,USA,1971,1973,e+e-,3,,8E+027,226,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+ISR,CERN,Switzerland,1971,1980,p+p+,31.4,,1.4E+032,943,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+SPEAR,SLAC,USA,1972,1990,e+e-,4.2,,1.2E+031,234,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+DORIS,DESY,Germany,1973,1993,e+e-,5.6,,3.3E+031,289,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+VEPP-2M,BINP,Russia,1974,2000,e+e-,0.7,,5E+030,18,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+VEPP-3,INP,Russia,1974,1975,e+e-,1.55,,2E+027,74,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+DCI,LAL,France,1977,1984,e+e-,1.8,,2E+030,94.6,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+SPS,CERN,Switzerland,1973,,p+,400,,,6911,https://ieeexplore.ieee.org/document/1590452 https://cds.cern.ch/record/2650722/files/CERN-ACC-NOTE-2018-0082.pdf
+PETRA,DESY,Germany,1978,1986,e+e-,23.4,,2.4E+031,2304,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+CESR,Cornell,USA,1979,2008,e+e-,6,,1.3E+033,768,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+VEPP-4M,BINP,Russia,1979,,e+e-,6,,2E+031,366,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+PEP,SLAC,USA,1980,1990,e+e-,15,,6E+031,2200,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+SppS,CERN,Switzerland,1981,1990,p+p-,455,,6E+030,6911,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+TRISTAN,KEK,Japan,1987,1995,e+e-,32,,4E+031,3018,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+Tevatron,Fermilab,USA,1987,2011,p+p-,980,,4.3E+032,6283,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+SLC,SLAC,USA,1989,1998,e+e-,50,,2.5E+030,2920,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+LEP,CERN,Switzerland,1989,2000,e+e-,104.6,,1E+032,26659,https://accelconf.web.cern.ch/e90/PDF/EPAC1990_0786.PDF
+BEPC,IHEP,China,1989,2000,e+e-,2.8,,5E+030,240.4,https://web.archive.org/web/20160316234203/http://www.ihep.ac.cn/english/E-Bepc/ https://en.wikipedia.org/wiki/Beijing_Electron%E2%80%93Positron_Collider_II
+HERA,DESY,Germany,1992,2007,e-p+,30,920,7.5E+031,6336,https://accelconf.web.cern.ch/e96/PAPERS/ORALS/MOX02A.PDF
+DAFNE,LNF,Italy,1997,,e+e-,0.51,,4.5E+032,98,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+PEP-II,SLAC,USA,1999,2008,e+e-,9,3.1,1.2E+034,2200,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+KEK-B,KEK,Japan,1999,2010,e+e-,8,3.5,2.1E+034,3016,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+SSC,Texas,USA,2000,,p+p+,20000,,1E+033,8712,https://en.wikipedia.org/wiki/Superconducting_Super_Collider
+RHIC,BNL,USA,2000,,p+p+,255,,2.5E+032,3834,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+VEPP-2000,BINP,Russia,2003,,e+e-,1,,4E+031,24,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+LHC,CERN,Switzerland,2008,,p+p+,6800,,2.1E+034,26659,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://cds.cern.ch/record/2826883/files/FERMILAB-CONF-22-574-AD.pdf
+BEPC-II,IHEP,China,2008,,e+e-,2.1,,1E+033,241.13,https://accelconf.web.cern.ch/fac08/PAPERS/MOACH01.PDF
+HL-LHC,CERN,Switzerland,2029,,p+p+,7000,,5E+034,26659,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://lhc-commissioning.web.cern.ch/schedule/LHC-long-term.htm
+SuperKEK-B,KEK,Japan,2018,,e+e-,7,4,8E+035,3016,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+NICA,JINR,Russia,2023,,p+p+,13.5,,1E+032,503,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://nica.jinr.ru/ https://accelconf.web.cern.ch/ipac2016/papers/weza02.pdf
+EIC,BNL,USA,2031*,,e-p+,275,18,1E+034,3834,https://arxiv.org/pdf/2203.13199.pdf https://indico.psi.ch/event/12451/attachments/20808/34257/PSI-EIC-Jan-31-2022-Seryi-r3.pdf
+FCC-ee Z,CERN,Switzerland,2041*,,e+e-,45.6,,2.3E+036,97750,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://doi-org.ezproxy.cern.ch/10.1140/epjst/e2019-900045-4
+FCC-ee WW,CERN,Switzerland,2043*,,e+e-,80,,2.8E+035,97750,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://doi-org.ezproxy.cern.ch/10.1140/epjst/e2019-900045-4
+FCC-ee ZH,CERN,Switzerland,2045*,,e+e-,120,,8.5E+034,97750,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://doi-org.ezproxy.cern.ch/10.1140/epjst/e2019-900045-4
+FCC-ee ttbar,CERN,Switzerland,2049*,,e+e-,182.5,,1.55E+034,97750,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://doi-org.ezproxy.cern.ch/10.1140/epjst/e2019-900045-4
+FCC-hh,CERN,Switzerland,2070*,,p+p+,50000,,3E+035,97750,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+CEPC,IHEP,China,2035*,,e+e-,45.5,,3.2E+035,100000,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://arxiv.org/abs/1809.00285 https://www.researchgate.net/publication/359254433_Snowmass_2021_White_Paper_AF4_-_SPPC
+SppC,IHEP,China,2050*,,p+p+,37500,,1E+035,100000,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://www.researchgate.net/publication/359254433_Snowmass_2021_White_Paper_AF4_-_SPPC
+ILC v1,Fermilab,USA,2035*,,e+e-,125,,1.35E+034,20500,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://arxiv.org/pdf/1901.09829.pdf
+ILC v2,Fermilab,USA,2040*,,e+e-,250,,1.8E+034,31000,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://arxiv.org/pdf/1901.09829.pdf
+ILC v3,Fermilab,USA,2045*,,e+e-,500,,4.9E+034,40000,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://arxiv.org/pdf/1901.09829.pdf
+HF2012 Higgs,Fermilab,USA,2050*,,e+e-,120,,1E+034,16000,https://arxiv.org/pdf/2203.08088.pdf
+HF2012 Z,Fermilab,USA,2055*,,e+e-,45.6,,6.3E+034,16000,https://arxiv.org/pdf/2203.08088.pdf
+FPP 24TeV,Fermilab,USA,2060*,,p+p+,12000,,3.5E+034,16000,https://arxiv.org/pdf/2203.08088.pdf
+FPP 27TeV,Fermilab,USA,2060*,,p+p+,13500,,2.85E+034,16000,https://arxiv.org/pdf/2203.08088.pdf
+CLIC380,CERN,Switzerland,2040*,,e+e-,190,,1.5E+034,11400,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://cds.cern.ch/record/2652600
+CLIC1500,CERN,Switzerland,2052*,,e+e-,750,,3.7E+034,29000,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://cds.cern.ch/record/2652600
+CLIC3000,CERN,Switzerland,2061*,,e+e-,1500,,5.9E+034,50100,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://cds.cern.ch/record/2652600
+HE-LHC,CERN,Switzerland,2040*,,p+p+,13500,,1.5E+035,26659,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
+Muon v1,CERN,Switzerland,2044*,,mu+mu-,63,,8E+031,300,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://arxiv.org/pdf/2209.01318.pdf
+Muon v2,CERN,Switzerland,2044*,,mu+mu-,3000,,1.2E+035,6000,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://arxiv.org/pdf/2209.01318.pdf
+Muon v3,CERN,Switzerland,2044*,,mu+mu-,7000,,3.3E+035,26659,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://arxiv.org/pdf/2209.01318.pdf

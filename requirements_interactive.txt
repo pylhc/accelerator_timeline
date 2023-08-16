@@ -1,0 +1,7 @@
+nbformat
+pandas
+plotly
+numpy
+ipython
+ipykernel 
+kaleido
