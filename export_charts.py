@@ -13,8 +13,8 @@ from matplotlib import pyplot as plt
 from matplotlib.figure import Figure
 
 from utilities.csv_reader import Column, import_collider_data
-from utilities.plot_helper import (PARTICLE_TYPES, PLOTLY_MPL_SYMBOL_MAP, CenterOfMassConfiguration,
-                                   LuminosityConfiguration, LuminosityOverCoMConfiguration,
+from utilities.plot_helper import (PARTICLE_TYPES, PLOTLY_MPL_SYMBOL_MAP, EnergyConfiguration,
+                                   LuminosityConfiguration, LuminosityOverEnergyConfiguration,
                                    PlotConfiguration, assign_textposition)
 
 MAIN_DIR = Path(__file__).parent
@@ -97,16 +97,16 @@ if __name__ == "__main__":
     data = import_collider_data()
     data = assign_textposition(data)
     
-    fig_com = plot(data, CenterOfMassConfiguration)
-    fig_com.savefig(output_dir / "center-of-mass.pdf")
-    fig_com.savefig(output_dir / "center-of-mass.png")
+    fig_com = plot(data, EnergyConfiguration)
+    fig_com.savefig(output_dir / "energy.pdf")
+    fig_com.savefig(output_dir / "energy.png")
 
     fig_lumi = plot(data, LuminosityConfiguration)
     fig_lumi.savefig(output_dir / "luminosity.pdf")
     fig_lumi.savefig(output_dir / "luminosity.png")
 
-    fig_lumi_vs_com = plot(data, LuminosityOverCoMConfiguration)
-    fig_lumi_vs_com.savefig(output_dir / "luminosity-vs-CoM.pdf")
-    fig_lumi_vs_com.savefig(output_dir / "luminosity-vs-CoM.png")
+    fig_lumi_vs_com = plot(data, LuminosityOverEnergyConfiguration)
+    fig_lumi_vs_com.savefig(output_dir / "luminosity-vs-energy.pdf")
+    fig_lumi_vs_com.savefig(output_dir / "luminosity-vs-energy.png")
 
     # plt.show()

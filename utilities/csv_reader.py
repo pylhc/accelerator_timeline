@@ -34,8 +34,9 @@ class Column:
     BUILT = "Built"
     FUTURE = "Future"
     YEARS = "Years"
-    TEXTPOSITION_COM = "TextPositionCoM"
+    TEXTPOSITION_COME = "TextPositionCoME"
     TEXTPOSITION_LUMI = "TextPositionLumi"
+    TEXTPOSITION_LVCOME = "TextPositionLvCoME"
 
 
 def import_collider_data() -> pd.DataFrame:

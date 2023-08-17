@@ -24,10 +24,10 @@ class PlotConfiguration(Protocol):
     logscale: str
 
 
-class CenterOfMassConfiguration:
+class EnergyConfiguration:
     xcolumn = Column.START_YEAR
     ycolumn = Column.COM_ENERGY
-    textposition = Column.TEXTPOSITION_COM
+    textposition = Column.TEXTPOSITION_COME
     xlabel = "Year"
     ylabel = "Center-of-Mass Energy [GeV]"
     logscale = "y"
@@ -42,11 +42,11 @@ class LuminosityConfiguration:
     logscale = "y"
 
 
-class LuminosityOverCoMConfiguration:
-    xcolumn = CenterOfMassConfiguration.ycolumn
+class LuminosityOverEnergyConfiguration:
+    xcolumn = EnergyConfiguration.ycolumn
     ycolumn = LuminosityConfiguration.ycolumn
-    textposition = Column.TEXTPOSITION_LUMI
-    xlabel = CenterOfMassConfiguration.ylabel
+    textposition = Column.TEXTPOSITION_LVCOME
+    xlabel = EnergyConfiguration.ylabel
     ylabel = LuminosityConfiguration.ylabel
     logscale = "xy"
 
@@ -85,8 +85,8 @@ PARTICLE_TYPES = [
 
 DEFAULT_TEXT_POSITION = "middle right"
 
-# manual text orientation for CoM plots
-SPECIAL_ORIENTATION_CoM = {
+# manual text orientation for CoM-Energy plots
+SPECIAL_ORIENTATION_ENERGY = {
     "FPP 24TeV": "bottom right",
     "FPP 27TeV": "top right",
     "KEK-B": "bottom center",
@@ -116,6 +116,24 @@ SPECIAL_ORIENTATION_LUMI = {
     "FCC-ee ZH": "middle left",
 }
 
+# manual text orientation for Lumi vs Energy plots
+SPECIAL_ORIENTATION_LUMI_ENERGY = {
+    "FPP 27TeV": "bottom right",
+    "PEP": "bottom right",
+    "PETRA": "bottom right",
+    "Muon v1": "top center",
+    "ISR": "top center",
+    "HF2012 Higgs": "middle left",
+    "CLIC1500": "bottom right",
+    "CLIC3000": "top center",
+    "HL-LHC": "middle left",
+    "ILC v1": "top left",
+    "ILC v2": "top center",
+    "ILC v3": "top center",
+    "CLIC380": "bottom center",
+
+}
+
 
 def assign_textposition(data: pd.DataFrame) -> pd.DataFrame:
     """Create two columns, which will tell the plot where the text should be placed.
@@ -127,11 +145,15 @@ def assign_textposition(data: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: DataFrame with the new Columns. 
     """
-    data[Column.TEXTPOSITION_COM] = data[Column.NAME].apply(
-        lambda name: SPECIAL_ORIENTATION_CoM.get(name, DEFAULT_TEXT_POSITION)
+    data[Column.TEXTPOSITION_COME] = data[Column.NAME].apply(
+        lambda name: SPECIAL_ORIENTATION_ENERGY.get(name, DEFAULT_TEXT_POSITION)
     )
 
     data[Column.TEXTPOSITION_LUMI] = data[Column.NAME].apply(
         lambda name: SPECIAL_ORIENTATION_LUMI.get(name, DEFAULT_TEXT_POSITION)
+    )
+
+    data[Column.TEXTPOSITION_LVCOME] = data[Column.NAME].apply(
+        lambda name: SPECIAL_ORIENTATION_LUMI_ENERGY.get(name, DEFAULT_TEXT_POSITION)
     )
     return data

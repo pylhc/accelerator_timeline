@@ -10,5 +10,6 @@ In addition, small python scripts are provided to explore the data via and creat
 as well as for publication export to pdf via matplotlib:
 [export_charts.py](export_charts.py) .
 
-![Center of Mass](images/center-of-mass.png)
+![Center of Mass](images/energy.png)
 ![Luminosity](images/luminosity.png)
+![LuminosityVsEnergy](images/luminosity-vs-energy.png)

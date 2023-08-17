@@ -14,7 +14,7 @@ import plotly
 import plotly.graph_objects as go
 
 from utilities.csv_reader import Column, import_collider_data
-from utilities.plot_helper import (PARTICLE_TYPES, CenterOfMassConfiguration,
+from utilities.plot_helper import (PARTICLE_TYPES, EnergyConfiguration,
                                    LuminosityConfiguration, PlotConfiguration, assign_textposition)
 
 # plotly.offline.init_notebook_mode()
@@ -119,7 +119,7 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> go.Figure:
 # Plotting ---
 # Here, the plotting is performed for Center-of-Mass and Luminosity timelines.
 
-fig_com = plot(data, CenterOfMassConfiguration)
+fig_com = plot(data, EnergyConfiguration)
 plotly.io.show(fig_com)
 
 fig_lumi = plot(data, LuminosityConfiguration)
