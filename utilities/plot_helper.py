@@ -83,22 +83,37 @@ PARTICLE_TYPES = [
 
 # Text Positions ---------------------------------------------------------------
 
-DEFAULT_TEXT_POSITION = "top center"
+DEFAULT_TEXT_POSITION = "middle right"
 
+# manual text orientation for CoM plots
 SPECIAL_ORIENTATION_CoM = {
-    "VEPP-4M": "middle right",
-    "FPP 24TeV": "bottom center",
+    "FPP 24TeV": "bottom right",
+    "FPP 27TeV": "top right",
     "KEK-B": "bottom center",
-    "TRISTAN": "bottom center",
-    "ADONE": "middle right",
+    "ILC v1": "middle left",
+    "FCC-ee Z": "bottom right",
+    "FCC-ee ZH": "middle left",
+    "ADONE": "middle left",
+    "CBX": "middle left",
+    "VEPP-2": "top right",
+    "VEPP-3": "bottom right",
+    "VEPP-4M": "top right",
+    "Muon v1": "bottom right",
 }
 
+# manual text orientation for LUMI plots
 SPECIAL_ORIENTATION_LUMI = {
-    "VEPP-2": "middle right",
-    "VEPP-4M": "bottom center",
-    "SLC": "bottom center",
-    "FPP 24TeV": "bottom center",
-    "CLIC380": "bottom center",
+    "VEPP-2M": "middle left",
+    "DORIS": "top right",
+    "PETRA": "middle left",
+    "Muon v3": "top center",
+    "HE-LHC": "middle left",
+    "ILC v1": "bottom center",
+    "ILC v2": "top center",
+    "HF2012 Higgs": "bottom center",
+    "HF2012 Z": "top right",
+    "FPP 27TeV": "bottom right",
+    "FCC-ee ZH": "middle left",
 }
 
 

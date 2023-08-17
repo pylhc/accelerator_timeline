@@ -32,9 +32,9 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> Figure:
     """
     fig, ax = plt.subplots()
             
-    pad = mpl.rcParams["lines.markersize"]/2
+    pad = mpl.rcParams["lines.markersize"]/3
     vmap = {"top": pad, "middle": 0, "bottom": -pad}
-    hmap = {"left": -pad, "center": 0, "right": pad}
+    hmap = {"left": -pad*2, "center": 0, "right": pad*2}
     alignment_map = {
         "left": "right", "center": "center", "right": "left", 
         "top": "bottom", "middle": "center", "bottom": "top"
