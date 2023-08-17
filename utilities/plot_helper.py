@@ -99,7 +99,7 @@ SPECIAL_ORIENTATION_ENERGY = {
     "VEPP-3": "bottom right",
     "VEPP-4M": "top right",
     "Muon v1": "bottom right",
-    "FCC-hh": "bottom center",
+    "FCC-hh": "top center",
 }
 
 # manual text orientation for LUMI plots
