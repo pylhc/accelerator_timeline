@@ -35,19 +35,29 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> Figure:
     pad = mpl.rcParams["lines.markersize"]/2
     vmap = {"top": pad, "middle": 0, "bottom": -pad}
     hmap = {"left": -pad, "center": 0, "right": pad}
-    alignment_map = {"left": "right", "center": "center", "right": "left", "top": "bottom", "middle": "center", "bottom": "top"}
+    alignment_map = {
+        "left": "right", "center": "center", "right": "left", 
+        "top": "bottom", "middle": "center", "bottom": "top"
+    }
 
     for particle_type in PARTICLE_TYPES:
         mask = data[Column.TYPE] == particle_type.shorthand
-        marker, fillstyle = PLOTLY_MPL_SYMBOL_MAP[particle_type.symbol]
-        ax.plot(
-            data.loc[mask, configuration.xcolumn], 
-            data.loc[mask, configuration.ycolumn],
-            linestyle="none",
-            marker=marker, fillstyle=fillstyle,
-            color=particle_type.color,
-            label=particle_type.latex,
-        )
+        marker = PLOTLY_MPL_SYMBOL_MAP[particle_type.symbol]
+
+        for has_been_built in (True, False):
+            if has_been_built:
+                builtmask, fillstyle, legend_prefix = data[Column.BUILT], "full", ""
+            else:
+                builtmask, fillstyle, legend_prefix = ~data[Column.BUILT], "none", "_"
+
+            ax.plot(
+                data.loc[mask & builtmask, configuration.xcolumn], 
+                data.loc[mask & builtmask, configuration.ycolumn],
+                linestyle="none",
+                marker=marker, fillstyle=fillstyle,
+                color=particle_type.color,
+                label=f"{legend_prefix}{particle_type.latex}",
+            )
 
         for x, y, text, textposition in zip(data.loc[mask, configuration.xcolumn], 
                                             data.loc[mask, configuration.ycolumn], 

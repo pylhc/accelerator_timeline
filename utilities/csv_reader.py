@@ -31,6 +31,8 @@ class Column:
     REFERENCES = "References"
     # Columns used in Code
     COM_ENERGY = "CoMEnergy"
+    BUILT = "Built"
+    FUTURE = "Future"
     YEARS = "Years"
     TEXTPOSITION_COM = "TextPositionCoM"
     TEXTPOSITION_LUMI = "TextPositionLumi"
@@ -54,20 +56,21 @@ def import_collider_data() -> pd.DataFrame:
 
     # Check for future colliders and convert year to int
     def year_range(args):
-        start, end = args
-        if str(start).endswith("*"):
-            return f"{int(start[:-1])} (Estimated)"
+        start, end, built, future = args
+        if not built:
+            return f"{start} (Estimated)"
         
         if not end or np.isnan(end):
-            if int(start) > datetime.now().year:
+            if future:
                 return f"{int(start)} - Unkown"
             else:
                 return f"{int(start)} - Present"
 
         return f"{int(start)} - {int(end)}"
 
-    data[Column.YEARS] = data[[Column.START_YEAR, Column.END_YEAR]].agg(year_range, axis=1)
+    data[Column.BUILT] = ~data[Column.START_YEAR].astype(str).str.endswith("*")
     data[Column.START_YEAR] = data[Column.START_YEAR].astype(str).str.replace("*", "").astype(int)
-
+    data[Column.FUTURE] = data[Column.START_YEAR] > datetime.now().year
+    data[Column.YEARS] = data[[Column.START_YEAR, Column.END_YEAR, Column.BUILT, Column.FUTURE]].agg(year_range, axis=1)
 
     return data

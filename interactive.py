@@ -48,27 +48,37 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> go.Figure:
     fig = go.Figure()
 
     for particle_type in PARTICLE_TYPES:
-        mask = data[Column.TYPE] == particle_type.shorthand
-        fig.add_trace(go.Scatter(
-            x=data.loc[mask, configuration.xcolumn], 
-            y=data.loc[mask, configuration.ycolumn],
-            name=particle_type.latex,
-            text=data.loc[mask, Column.NAME],
-            textposition=data.loc[mask, configuration.textposition],
-            mode="markers+text", 
-            marker={"symbol": particle_type.symbol, 
-                    "color": particle_type.color}, 
-            customdata=np.transpose([
-                data.loc[mask, Column.NAME],
-                [particle_type.name] * sum(mask),
-                data.loc[mask, Column.COM_ENERGY],
-                data.loc[mask, Column.LUMINOSITY],
-                data.loc[mask, Column.LENGTH],
-                data.loc[mask, Column.YEARS],
-                data.loc[mask, Column.INSTITUTE],
-                data.loc[mask, Column.COUNTRY],
-            ])
-        ))
+        particle_mask = data[Column.TYPE] == particle_type.shorthand
+        for has_been_built in (True, False):
+            if has_been_built:
+                builtmask, marker_suffix, legend = data[Column.BUILT], "", "built"
+            else:
+                builtmask, marker_suffix, legend = ~data[Column.BUILT], "-open", "not built"
+            
+            mask = particle_mask & builtmask
+
+            fig.add_trace(go.Scatter(
+                x=data.loc[mask & builtmask, configuration.xcolumn], 
+                y=data.loc[mask & builtmask, configuration.ycolumn],
+                name=legend,
+                legendgroup=particle_type.name,
+                legendgrouptitle_text=particle_type.latex,
+                text=data.loc[mask, Column.NAME],
+                textposition=data.loc[mask, configuration.textposition],
+                mode="markers+text", 
+                marker={"symbol": f"{particle_type.symbol}{marker_suffix}", 
+                        "color": particle_type.color}, 
+                customdata=np.transpose([
+                    data.loc[mask, Column.NAME],
+                    [particle_type.name] * sum(mask),
+                    data.loc[mask, Column.COM_ENERGY],
+                    data.loc[mask, Column.LUMINOSITY],
+                    data.loc[mask, Column.LENGTH],
+                    data.loc[mask, Column.YEARS],
+                    data.loc[mask, Column.INSTITUTE],
+                    data.loc[mask, Column.COUNTRY],
+                ])
+            ))
 
     fig.update_traces(
         hovertemplate="<br>".join([

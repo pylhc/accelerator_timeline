@@ -62,14 +62,13 @@ class ParticleTypeMap:
     color: str 
 
 HADRON_SYMBOL = "diamond"
-LEPTON_SYMBOL = "circle-open"
-MUON_SYMBOL = "circle"
+LEPTON_SYMBOL = "circle"
 
 PLOTLY_MPL_SYMBOL_MAP = {
-    "diamond": ("d", "full"),
-    "circle-open": ("o", "none"),
-    "circle": ("o", "full"),
-    "cross": ("x", "full"),
+    "diamond": "d",
+    "circle": "o",
+    "cross": "x",
+    "square": "s",
 }
 
 
@@ -78,7 +77,7 @@ PARTICLE_TYPES = [
         ParticleTypeMap("proton-antiproton", "p+p-", r"$p\bar{p}$", HADRON_SYMBOL, "#2ca02c"),
         ParticleTypeMap("electron-electron", "e-e-", r"$e^-e^-$", LEPTON_SYMBOL, "#1f77b4"),
         ParticleTypeMap("electron-positron", "e+e-", r"$e^+e^-$", LEPTON_SYMBOL, "#ff7f0e"),
-        ParticleTypeMap("muon-antimuon", "mu+mu-", r"$\mu^+\mu^-$", MUON_SYMBOL, "#9467bd"),
+        ParticleTypeMap("muon-antimuon", "mu+mu-", r"$\mu^+\mu^-$", LEPTON_SYMBOL, "#9467bd"),
 ]
 
 
