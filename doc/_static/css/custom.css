@@ -248,7 +248,7 @@ em.sig-param span.default_value {
 
 /* Mask entry of main header (chapter) */
 #local-table-of-contents a[href="#"]{
-  /*display: none;*/
+  display: none;
 }
 
 /* indent subsections */

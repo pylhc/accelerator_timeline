@@ -162,9 +162,9 @@ extensions = [
     # "sphinxcontrib.bibtex",  # Insert BibTeX citations into Sphinx documentation
     "sphinx_copybutton",  # Add a "copy" button to code blocks
     "sphinx_gallery.gen_gallery",  # Build an HTML gallery of examples from a set of Python scripts
-    "sphinx_issues",  # Link to project's issue tracker
+    # "sphinx_issues",  # Link to project's issue tracker
     "matplotlib.sphinxext.plot_directive",  # Include a Matplotlib plot in a Sphinx document
-    "sphinx-prompt",  # prompt symbols will not be copy-pastable
+    # "sphinx-prompt",  # prompt symbols will not be copy-pastable
 ]
 
 # Config for autosectionlabel extension
