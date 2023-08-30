@@ -7,6 +7,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = python -msphinx
 PAPER         =
 BUILDDIR      = _build
+GALLERYDIR    = gallery
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -40,8 +41,10 @@ help:
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 
 clean:
-	-rm -rf $(BUILDDIR)/*
-	-rm -rf ./gallery
+	-rm -rf $(BUILDDIR)
+	-rm -rf $(GALLERYDIR)
+	-rm -rf gen_*
+
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
@@ -84,17 +87,17 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/accelerator_timeline.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/omc3.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/accelerator_timeline.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/omc3.qhc"
 
 devhelp:
 	$(SPHINXBUILD) -b devhelp $(ALLSPHINXOPTS) $(BUILDDIR)/devhelp
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/accelerator_timeline"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/accelerator_timeline"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/omc3"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/omc3"
 	@echo "# devhelp"
 
 epub:

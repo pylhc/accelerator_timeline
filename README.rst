@@ -1,2 +1,6 @@
-Accelerator Timeline 
-====================
+.. _examples-index:
+
+.. _gallery:
+
+Accelerator Charts Gallery
+==========================

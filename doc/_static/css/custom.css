@@ -57,6 +57,14 @@
   border: none;
 }
 
+/* Hide the first two entries (combined in the first <ul>) of the nav-bar, 
+    as they are coming from the included gallery */
+
+.wy-menu-vertical ul:nth-child(-n + 1) {
+    display: none !important;
+}
+
+
 .ethical-rtd > div.ethical-sidebar,
 .ethical-rtd > div.ethical-footer {
   display: none !important;
@@ -187,10 +195,13 @@ em.sig-param span.default_value {
   padding: 0 4px;
 }
 
-.wy-table-responsive table td,
-.wy-table-responsive table th {
-  white-space: normal;
-}
+
+
+/* Format Tables
+   Not sure why the following were in the css, 
+   but some of them break the csv table formatting.
+   I left those in, that looked good.
+*/
 
 .wy-table-bordered-all,
 .rst-content table.docutils {
@@ -208,15 +219,20 @@ em.sig-param span.default_value {
   background: rgb(243,244,247);
 }
 
-.wy-table td,
+
+/* .wy-table td,
 .rst-content table.docutils td,
 .rst-content table.field-list td,
 .wy-table th,
 .rst-content table.docutils th,
 .rst-content table.field-list th {
   padding: 16px;
-}
+} */
 
+/* .wy-table-responsive table td,
+.wy-table-responsive table th {
+  white-space: normal;
+} */
 
 /* Create local table of contents
    ------------------------------

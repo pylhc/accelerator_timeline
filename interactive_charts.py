@@ -1,30 +1,46 @@
 """
 Interactive Accelerator Timeline
-================================
+********************************
 
-This script allows you to interactively explore the accelerator data.
+This script allows you to interactively explore the accelerator data,
+either by running the script and viewing the plots in a browser,
+by running the script in interactive-mode e.g. in vscode 
+or by checking the from this script generated gallery.
+
 To run the script, make sure your environment has the requirements 
-of `requirements_interactive.txt` installed.
+of `requirements_interactive_charts.txt` installed.
 """
 #%%
-# Preparations ---
+# Preparations 
+# ------------
+# 
+# Import modules and define plotting function.
+# This code is omitted in the interactive gallery, so that you can immediately enjoy the interactive plots below.
+# Check `interactive.py <https://github.com/pylhc/accelerator_timeline/blob/master/interactive.py>`_ 
+# for the full example code.
+#
+
+# No code to see here in the interactive gallery or the generated jupyter notebook.
+# sphinx_gallery_start_ignore
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import plotly
 import plotly.graph_objects as go
+from IPython.display import HTML, display
 
 from utilities.csv_reader import Column, import_collider_data
-from utilities.plot_helper import (PARTICLE_TYPES, EnergyConfiguration,
-                                   LuminosityConfiguration, PlotConfiguration, assign_textposition)
+from utilities.plot_helper import (PARTICLE_TYPES, EnergyConfiguration, LuminosityConfiguration,
+                                   LuminosityOverEnergyConfiguration, PlotConfiguration,
+                                   assign_textposition)
+from utilities.sphinx_helper import get_gallery_dir, is_interactive, is_sphinx_build
 
-# plotly.offline.init_notebook_mode()
-plotly.io.renderers.default = "notebook_connected"
-
-# Hack for rendering LaTeX in VSCode (see https://github.com/microsoft/vscode-jupyter/issues/8131#issuecomment-1589961116)
-from IPython.display import display, HTML
-display(HTML(
-    '<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_SVG"></script>'
-))
+# Hack for rendering LaTeX in VSCode 
+# (see https://github.com/microsoft/vscode-jupyter/issues/8131#issuecomment-1589961116)
+if not is_sphinx_build() and is_interactive():
+    display(HTML(
+        '<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_SVG"></script>'
+    ))
 
 # Import Data ---
 data = import_collider_data()
@@ -90,10 +106,13 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> go.Figure:
             "Operation: %{customdata[5]}",
         ]) + "<extra></extra>"
     )
+
+    logx, logy = "x" in configuration.logscale, "y" in configuration.logscale
     fig.update_xaxes(
         title=configuration.xlabel, 
-        dtick=10, 
-        minor=dict(dtick=1, ticks="outside"),
+        type="log" if logx else "linear",
+        dtick=1 if logx else 10, 
+        minor=dict(dtick="D1" if logx else 1, ticks="outside"),
         ticks='outside',
         showline=True,
         linecolor='black',
@@ -101,10 +120,10 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> go.Figure:
     )
     fig.update_yaxes(
         title=configuration.ylabel, 
-        type="log",
+        type="log" if "y" in configuration.logscale else "linear",
         ticks='outside',
-        dtick=1,
-        minor=dict(dtick="D1", ticks="outside", showgrid=False),
+        dtick=1 if logy else 10, 
+        minor=dict(dtick="D1" if logy else None, ticks="outside", showgrid=False),
         showline=True,
         linecolor='black',
         gridcolor='lightgrey',
@@ -115,21 +134,62 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> go.Figure:
     )
     return fig
 
+# sphinx_gallery_end_ignore
+
 #%%
-# Plotting ---
-# Here, the plotting is performed for Center-of-Mass and Luminosity timelines.
+# Energy Timeline
+# ---------------
+# 
 
 fig_com = plot(data, EnergyConfiguration)
-plotly.io.show(fig_com)
+# sphinx_gallery_start_ignore
+if not is_sphinx_build() and not is_interactive():
+    fig_com.show()
+fig_com
+# sphinx_gallery_end_ignore
+
+#%%
+# Luminosity timeline
+# -------------------
+#
 
 fig_lumi = plot(data, LuminosityConfiguration)
-plotly.io.show(fig_lumi)
+# sphinx_gallery_start_ignore
+if not is_sphinx_build() and not is_interactive():
+    fig_lumi.show()
+fig_lumi
+# sphinx_gallery_end_ignore
+
+#%%
+# Luminosity vs. Energy 
+# ---------------------
+#
+
+fig_lumi_energy = plot(data, LuminosityOverEnergyConfiguration)
+# sphinx_gallery_start_ignore
+if not is_sphinx_build() and not is_interactive():
+    fig_lumi_energy.show()
+fig_lumi_energy
+# sphinx_gallery_end_ignore
 
 #%% 
 # Save plots
 # ----------
 # 
-# Optionally, save the plots as PDF.
+# Save the plots as PDF and PNG.
 
-# plotly.io.write_image(fig_com, "center-of-mass-energy.pdf", format="pdf")
-# plotly.io.write_image(fig_lumi, "peak-luminosity.pdf", format="pdf")
+output_dir = Path("images")
+# sphinx_gallery_start_ignore
+if is_sphinx_build():
+    output_dir = get_gallery_dir()
+# sphinx_gallery_end_ignore
+
+plotly.io.write_image(fig_com, output_dir / "energy-plotly.pdf", format="pdf")
+plotly.io.write_image(fig_com, output_dir / "energy-plotly.png", format="png")
+plotly.io.write_image(fig_lumi, output_dir / "luminosity-plotly.pdf", format="pdf")
+plotly.io.write_image(fig_lumi, output_dir / "luminosity-plotly.png", format="png")
+plotly.io.write_image(fig_lumi_energy, output_dir / "luminosity-vs-energy-plotly.pdf", format="pdf")
+plotly.io.write_image(fig_lumi_energy, output_dir / "luminosity-vs-energy-plotly.png", format="png")
+
+
+# sphinx_gallery_thumbnail_path = 'gallery/luminosity-vs-energy-plotly.png'

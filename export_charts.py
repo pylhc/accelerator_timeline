@@ -1,8 +1,13 @@
 """ 
 Export Accelerator Timeline
----------------------------
+***************************
 
+This is an example script to generate static plots of the accelerator data via 
+matplotlib.
+To run the script, make sure your environment has the requirements 
+of `requirements_export_charts.txt` installed.
 """
+import os
 from pathlib import Path
 
 import matplotlib as mpl
@@ -16,12 +21,12 @@ from utilities.csv_reader import Column, import_collider_data
 from utilities.plot_helper import (PARTICLE_TYPES, PLOTLY_MPL_SYMBOL_MAP, EnergyConfiguration,
                                    LuminosityConfiguration, LuminosityOverEnergyConfiguration,
                                    PlotConfiguration, assign_textposition)
+from utilities.sphinx_helper import get_gallery_dir, is_sphinx_build
 
-MAIN_DIR = Path(__file__).parent
 
 def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> Figure:
-    """Generate interactive plots with plotly, based on the given configuration, 
-    which defines the columns to use and the text positions.
+    """Generate interactive plots with matplotlib, based on the given configuration, 
+    which defines the columns to use, labels and the text positions.
 
     Args:
         data (pd.DataFrame): DataFrame containing the (modified) accelerator timeline data
@@ -91,8 +96,14 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> Figure:
 
 
 if __name__ == "__main__":
+    if is_sphinx_build():
+        MAIN_DIR = Path()
+        output_dir = get_gallery_dir()
+    else:
+        MAIN_DIR = Path(__file__).parent
+        output_dir = MAIN_DIR / "images"
+
     plt.style.use(MAIN_DIR / "utilities" / "chart.mplstyle")
-    output_dir = MAIN_DIR / "images"
 
     data = import_collider_data()
     data = assign_textposition(data)
@@ -108,5 +119,7 @@ if __name__ == "__main__":
     fig_lumi_vs_com = plot(data, LuminosityOverEnergyConfiguration)
     fig_lumi_vs_com.savefig(output_dir / "luminosity-vs-energy.pdf")
     fig_lumi_vs_com.savefig(output_dir / "luminosity-vs-energy.png")
-
+    
     # plt.show()
+
+# sphinx_gallery_thumbnail_path = 'gallery/luminosity-vs-energy.png'

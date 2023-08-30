@@ -5,10 +5,13 @@ collected, including references to the origin of the collected data, into a sing
 which can be found at: [accelerator-parameters.csv](accelerator-parameters.csv).
 
 In addition, small python scripts are provided to explore the data via and create Livingston-like plots plotly:
-[interactive.py](interactive.py)
+[interactive_charts.py](interactive_charts.py)
 <br>
 as well as for publication export to pdf via matplotlib:
 [export_charts.py](export_charts.py) .
+
+
+The requirements for the scripts can be found in the respective `requirements_*.txt` file.
 
 ![Center of Mass](images/energy.png)
 ![Luminosity](images/luminosity.png)

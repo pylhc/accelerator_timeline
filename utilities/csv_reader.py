@@ -1,6 +1,6 @@
 """ 
 CSV Reader
-----------
+**********
 
 Functionality to gather the data from the CSV file into an easy-to-use format:
 A pandas DataFrame. In addition, some manipulation on the data is done, so 

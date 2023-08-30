@@ -1,6 +1,6 @@
 """ 
 Plot Helper
------------
+***********
 
 Helper functions that are common for both matplotlib and plotly.
 These help to define what to plot, to organize the data and to 
