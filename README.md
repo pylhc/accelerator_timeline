@@ -1,8 +1,24 @@
 # Accelerator Timeline
 
 In this package, the main parameters of major historical, modern and possible future accelerators are 
-collected, including references to the origin of the collected data, into a single csv,
-which can be found at: [accelerator-parameters.csv](accelerator-parameters.csv).
+collected, including references to the origin of the collected data, into a single csv:
+
+ -  [accelerator-parameters.csv](accelerator-parameters.csv).
+
+## Installation 
+
+This package is mostly for collecting and sharing the data of the accelerators within
+the CSV file. 
+
+
+To get the data, either download the [accelerator-parameters.csv](accelerator-parameters.csv) directly, 
+or clone the repository via `git`, e.g.::
+
+```
+git clone https://github.com/pylhc/accelerator_timeline.git
+```
+
+## Example Scripts
 
 In addition, small python scripts are provided to explore the data via and create Livingston-like plots plotly:
 [interactive_charts.py](interactive_charts.py)

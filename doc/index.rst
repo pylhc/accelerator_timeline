@@ -2,17 +2,16 @@ Welcome to the Accelerator Timeline Package
 ===========================================
 
 
-
 Installation
 ~~~~~~~~~~~~
 
 This package is mostly for collecting and sharing the data of the accelerators within
-the CSV file `CSV File`_ . 
+the `CSV File`_ . 
 
 
-To get the data, either download the `CSV File`_ directly, or install via `git`, e.g.::
+To get the data, either download the `CSV File`_ directly, or clone the repository via `git`, e.g.::
 
-    git clone git+https://github.com/pylhc/accelerator_timeline.git
+    git clone https://github.com/pylhc/accelerator_timeline.git
 
 
 Gallery
