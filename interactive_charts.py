@@ -16,7 +16,7 @@ of `requirements_interactive_charts.txt` installed.
 # 
 # Import modules and define plotting function.
 # This code is omitted in the interactive gallery, so that you can immediately enjoy the interactive plots below.
-# Check `interactive.py <https://github.com/pylhc/accelerator_timeline/blob/master/interactive.py>`_ 
+# Check `interactive.py <https://github.com/pylhc/accelerator_timeline/blob/master/interactive_charts.py>`_ 
 # for the full example code.
 #
 
@@ -32,7 +32,7 @@ from IPython.display import HTML, display
 from utilities.csv_reader import Column, import_collider_data
 from utilities.plot_helper import (PARTICLE_TYPES, EnergyConfiguration, LuminosityConfiguration,
                                    LuminosityOverEnergyConfiguration, PlotConfiguration,
-                                   assign_textposition)
+                                   assign_textposition, check_all_types_accounted_for)
 from utilities.sphinx_helper import get_gallery_dir, is_interactive, is_sphinx_build
 
 # Hack for rendering LaTeX in VSCode 
@@ -45,6 +45,7 @@ if not is_sphinx_build() and is_interactive():
 # Import Data ---
 data = import_collider_data()
 data = assign_textposition(data)
+check_all_types_accounted_for(data)
 
 # Plotting Function ---
 # This is the definition of the actual plotting function, 

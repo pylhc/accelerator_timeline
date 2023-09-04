@@ -20,7 +20,7 @@ from matplotlib.figure import Figure
 from utilities.csv_reader import Column, import_collider_data
 from utilities.plot_helper import (PARTICLE_TYPES, PLOTLY_MPL_SYMBOL_MAP, EnergyConfiguration,
                                    LuminosityConfiguration, LuminosityOverEnergyConfiguration,
-                                   PlotConfiguration, assign_textposition)
+                                   PlotConfiguration, assign_textposition, check_all_types_accounted_for)
 from utilities.sphinx_helper import get_gallery_dir, is_sphinx_build
 
 
@@ -107,6 +107,7 @@ if __name__ == "__main__":
 
     data = import_collider_data()
     data = assign_textposition(data)
+    check_all_types_accounted_for(data)
     
     fig_com = plot(data, EnergyConfiguration)
     fig_com.savefig(output_dir / "energy.pdf")
