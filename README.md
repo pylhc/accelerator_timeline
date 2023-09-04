@@ -2,7 +2,7 @@
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/pylhc/accelerator_timeline.svg?style=popout)](https://github.com/pylhc/accelerator_timeline/)
 [![GitHub release](https://img.shields.io/github/release/pylhc/accelerator_timeline.svg?style=popout)](https://github.com/pylhc/accelerator_timeline/)
-<!-- [![DOI](https://zenodo.org/badge/DOI/.svg)](https://doi.org/) -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8316137.svg)](https://doi.org/10.5281/zenodo.8316137)
 
 In this package, the main parameters of major historical, modern and possible future accelerators are 
 collected, including references to the origin of the collected data, into a single csv:
