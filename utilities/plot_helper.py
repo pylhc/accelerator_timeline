@@ -12,7 +12,7 @@ from typing import Protocol
 
 import pandas as pd
 
-from utilities.csv_reader import Column
+from utilities.csv_reader import Column, import_collider_data
 
 # Main Plot Configurations  ----------------------------------------------------
 
@@ -63,6 +63,7 @@ class ParticleTypeMap:
 
 HADRON_SYMBOL = "diamond"
 LEPTON_SYMBOL = "circle"
+OTHER_SYMBOL = "square"
 
 PLOTLY_MPL_SYMBOL_MAP = {
     "diamond": "d",
@@ -77,8 +78,26 @@ PARTICLE_TYPES = [
         ParticleTypeMap("proton-antiproton", "p+p-", r"$p\bar{p}$", HADRON_SYMBOL, "#2ca02c"),
         ParticleTypeMap("electron-electron", "e-e-", r"$e^-e^-$", LEPTON_SYMBOL, "#1f77b4"),
         ParticleTypeMap("electron-positron", "e+e-", r"$e^+e^-$", LEPTON_SYMBOL, "#ff7f0e"),
+        ParticleTypeMap("electron-proton", "e-p+", r"$e^-p$", OTHER_SYMBOL, "#DD34BE"),
         ParticleTypeMap("muon-antimuon", "mu+mu-", r"$\mu^+\mu^-$", LEPTON_SYMBOL, "#9467bd"),
 ]
+
+def check_all_types_accounted_for(data: pd.DataFrame = None) -> None:
+    """Helper function to check if all particle types in the list are accounted for and hence will be plotted.
+    
+    Args:
+        data (pd.DataFrame): DataFrame containing the accelerator timeline data.
+    """
+    if data is None: 
+        data = import_collider_data()
+
+    particle_types = [ptype.shorthand for ptype in PARTICLE_TYPES]
+    missing = [ptype for ptype in set(data[Column.TYPE]) if ptype not in particle_types]
+
+    if missing:
+        raise ValueError("The following particle-types are missing, "
+                         "please add them to the PARTICLE_TYPES list in utilities.plot_helper: "
+                         f"{missing}")
 
 
 # Text Positions ---------------------------------------------------------------
@@ -116,6 +135,7 @@ SPECIAL_ORIENTATION_LUMI = {
     "FPP 27TeV": "bottom right",
     "FCC-ee ZH": "middle left",
     "FCC-hh": "top center",
+    "EIC": "middle left",
 }
 
 # manual text orientation for Lumi vs Energy plots
@@ -134,6 +154,7 @@ SPECIAL_ORIENTATION_LUMI_ENERGY = {
     "ILC v3": "top center",
     "CLIC380": "bottom center",
     "FCC-hh": "top center",
+    "EIC": "bottom center",
 }
 
 
