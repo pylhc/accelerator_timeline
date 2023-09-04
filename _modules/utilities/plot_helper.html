@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utilities.plot_helper &mdash; accelerator_timeline 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/omc_logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/export_charts.html">Export Accelerator Timeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/interactive_charts.html">Interactive Accelerator Timeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery/interactive_charts.html#preparations">Preparations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery/interactive_charts.html#energy-timeline">Energy Timeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery/interactive_charts.html#luminosity-timeline">Luminosity timeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery/interactive_charts.html#luminosity-vs-energy">Luminosity vs. Energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery/interactive_charts.html#save-plots">Save plots</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/index.html">Accelerator Charts Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery/export_charts.html">Export Accelerator Timeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery/interactive_charts.html">Interactive Accelerator Timeline</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#main-scripts">Main Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#utilities">Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">accelerator_timeline</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">utilities.plot_helper</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  
+  
+           <div itemprop="articleBody">
+             
+  <h1>Source code for utilities.plot_helper</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">Plot Helper</span>
+<span class="sd">***********</span>
+
+<span class="sd">Helper functions that are common for both matplotlib and plotly.</span>
+<span class="sd">These help to define what to plot, to organize the data and to </span>
+<span class="sd">align the text in the plot.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Protocol</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">utilities.csv_reader</span> <span class="kn">import</span> <span class="n">Column</span>
+
+<span class="c1"># Main Plot Configurations  ----------------------------------------------------</span>
+
+<div class="viewcode-block" id="PlotConfiguration">
+<a class="viewcode-back" href="../../scripts.html#utilities.plot_helper.PlotConfiguration">[docs]</a>
+<span class="k">class</span> <span class="nc">PlotConfiguration</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="n">xcolumn</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">ycolumn</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">textposition</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">logscale</span><span class="p">:</span> <span class="nb">str</span></div>
+
+
+
+<span class="k">class</span> <span class="nc">EnergyConfiguration</span><span class="p">:</span>
+    <span class="n">xcolumn</span> <span class="o">=</span> <span class="n">Column</span><span class="o">.</span><span class="n">START_YEAR</span>
+    <span class="n">ycolumn</span> <span class="o">=</span> <span class="n">Column</span><span class="o">.</span><span class="n">COM_ENERGY</span>
+    <span class="n">textposition</span> <span class="o">=</span> <span class="n">Column</span><span class="o">.</span><span class="n">TEXTPOSITION_COME</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="s2">&quot;Year&quot;</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="s2">&quot;Center-of-Mass Energy [GeV]&quot;</span>
+    <span class="n">logscale</span> <span class="o">=</span> <span class="s2">&quot;y&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">LuminosityConfiguration</span><span class="p">:</span>
+    <span class="n">xcolumn</span> <span class="o">=</span> <span class="n">Column</span><span class="o">.</span><span class="n">START_YEAR</span>
+    <span class="n">ycolumn</span> <span class="o">=</span> <span class="n">Column</span><span class="o">.</span><span class="n">LUMINOSITY</span>
+    <span class="n">textposition</span> <span class="o">=</span> <span class="n">Column</span><span class="o">.</span><span class="n">TEXTPOSITION_LUMI</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="s2">&quot;Year&quot;</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$\mathrm{Peak\;Luminosity}\;\left[\mathrm</span><span class="si">{cm}</span><span class="s2">^{-2}\mathrm</span><span class="si">{s}</span><span class="s2">^{-1}\right]$&quot;</span>
+    <span class="n">logscale</span> <span class="o">=</span> <span class="s2">&quot;y&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">LuminosityOverEnergyConfiguration</span><span class="p">:</span>
+    <span class="n">xcolumn</span> <span class="o">=</span> <span class="n">EnergyConfiguration</span><span class="o">.</span><span class="n">ycolumn</span>
+    <span class="n">ycolumn</span> <span class="o">=</span> <span class="n">LuminosityConfiguration</span><span class="o">.</span><span class="n">ycolumn</span>
+    <span class="n">textposition</span> <span class="o">=</span> <span class="n">Column</span><span class="o">.</span><span class="n">TEXTPOSITION_LVCOME</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">EnergyConfiguration</span><span class="o">.</span><span class="n">ylabel</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">LuminosityConfiguration</span><span class="o">.</span><span class="n">ylabel</span>
+    <span class="n">logscale</span> <span class="o">=</span> <span class="s2">&quot;xy&quot;</span>
+
+
+<span class="c1"># Plotting Symbols, Text and Colors --------------------------------------------</span>
+
+<div class="viewcode-block" id="ParticleTypeMap">
+<a class="viewcode-back" href="../../scripts.html#utilities.plot_helper.ParticleTypeMap">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">ParticleTypeMap</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">shorthand</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">latex</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> </div>
+
+
+<span class="n">HADRON_SYMBOL</span> <span class="o">=</span> <span class="s2">&quot;diamond&quot;</span>
+<span class="n">LEPTON_SYMBOL</span> <span class="o">=</span> <span class="s2">&quot;circle&quot;</span>
+
+<span class="n">PLOTLY_MPL_SYMBOL_MAP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;diamond&quot;</span><span class="p">:</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;circle&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cross&quot;</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;square&quot;</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="n">PARTICLE_TYPES</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">ParticleTypeMap</span><span class="p">(</span><span class="s2">&quot;proton-proton&quot;</span><span class="p">,</span> <span class="s2">&quot;p+p+&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$pp$&quot;</span><span class="p">,</span> <span class="n">HADRON_SYMBOL</span><span class="p">,</span> <span class="s2">&quot;#d62728&quot;</span><span class="p">),</span>
+        <span class="n">ParticleTypeMap</span><span class="p">(</span><span class="s2">&quot;proton-antiproton&quot;</span><span class="p">,</span> <span class="s2">&quot;p+p-&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$p\bar</span><span class="si">{p}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">HADRON_SYMBOL</span><span class="p">,</span> <span class="s2">&quot;#2ca02c&quot;</span><span class="p">),</span>
+        <span class="n">ParticleTypeMap</span><span class="p">(</span><span class="s2">&quot;electron-electron&quot;</span><span class="p">,</span> <span class="s2">&quot;e-e-&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$e^-e^-$&quot;</span><span class="p">,</span> <span class="n">LEPTON_SYMBOL</span><span class="p">,</span> <span class="s2">&quot;#1f77b4&quot;</span><span class="p">),</span>
+        <span class="n">ParticleTypeMap</span><span class="p">(</span><span class="s2">&quot;electron-positron&quot;</span><span class="p">,</span> <span class="s2">&quot;e+e-&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$e^+e^-$&quot;</span><span class="p">,</span> <span class="n">LEPTON_SYMBOL</span><span class="p">,</span> <span class="s2">&quot;#ff7f0e&quot;</span><span class="p">),</span>
+        <span class="n">ParticleTypeMap</span><span class="p">(</span><span class="s2">&quot;muon-antimuon&quot;</span><span class="p">,</span> <span class="s2">&quot;mu+mu-&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\mu^+\mu^-$&quot;</span><span class="p">,</span> <span class="n">LEPTON_SYMBOL</span><span class="p">,</span> <span class="s2">&quot;#9467bd&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+
+<span class="c1"># Text Positions ---------------------------------------------------------------</span>
+
+<span class="n">DEFAULT_TEXT_POSITION</span> <span class="o">=</span> <span class="s2">&quot;middle right&quot;</span>
+
+<span class="c1"># manual text orientation for CoM-Energy plots</span>
+<span class="n">SPECIAL_ORIENTATION_ENERGY</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;FPP 24TeV&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FPP 27TeV&quot;</span><span class="p">:</span> <span class="s2">&quot;top right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KEK-B&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom center&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ILC v1&quot;</span><span class="p">:</span> <span class="s2">&quot;middle left&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FCC-ee Z&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FCC-ee ZH&quot;</span><span class="p">:</span> <span class="s2">&quot;middle left&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ADONE&quot;</span><span class="p">:</span> <span class="s2">&quot;middle left&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CBX&quot;</span><span class="p">:</span> <span class="s2">&quot;middle left&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VEPP-2&quot;</span><span class="p">:</span> <span class="s2">&quot;top right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VEPP-3&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VEPP-4M&quot;</span><span class="p">:</span> <span class="s2">&quot;top right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Muon v1&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FCC-hh&quot;</span><span class="p">:</span> <span class="s2">&quot;top center&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># manual text orientation for LUMI plots</span>
+<span class="n">SPECIAL_ORIENTATION_LUMI</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;VEPP-2M&quot;</span><span class="p">:</span> <span class="s2">&quot;middle left&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DORIS&quot;</span><span class="p">:</span> <span class="s2">&quot;top right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PETRA&quot;</span><span class="p">:</span> <span class="s2">&quot;middle left&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Muon v3&quot;</span><span class="p">:</span> <span class="s2">&quot;top center&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HE-LHC&quot;</span><span class="p">:</span> <span class="s2">&quot;middle left&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ILC v1&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom center&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ILC v2&quot;</span><span class="p">:</span> <span class="s2">&quot;top center&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HF2012 Higgs&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom center&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HF2012 Z&quot;</span><span class="p">:</span> <span class="s2">&quot;top right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FPP 27TeV&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FCC-ee ZH&quot;</span><span class="p">:</span> <span class="s2">&quot;middle left&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FCC-hh&quot;</span><span class="p">:</span> <span class="s2">&quot;top center&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># manual text orientation for Lumi vs Energy plots</span>
+<span class="n">SPECIAL_ORIENTATION_LUMI_ENERGY</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;FPP 27TeV&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PEP&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PETRA&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Muon v1&quot;</span><span class="p">:</span> <span class="s2">&quot;top center&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ISR&quot;</span><span class="p">:</span> <span class="s2">&quot;top center&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HF2012 Higgs&quot;</span><span class="p">:</span> <span class="s2">&quot;middle left&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CLIC1500&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom right&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CLIC3000&quot;</span><span class="p">:</span> <span class="s2">&quot;top center&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HL-LHC&quot;</span><span class="p">:</span> <span class="s2">&quot;middle left&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ILC v1&quot;</span><span class="p">:</span> <span class="s2">&quot;top left&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ILC v2&quot;</span><span class="p">:</span> <span class="s2">&quot;top center&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ILC v3&quot;</span><span class="p">:</span> <span class="s2">&quot;top center&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CLIC380&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom center&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FCC-hh&quot;</span><span class="p">:</span> <span class="s2">&quot;top center&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="assign_textposition">
+<a class="viewcode-back" href="../../scripts.html#utilities.plot_helper.assign_textposition">[docs]</a>
+<span class="k">def</span> <span class="nf">assign_textposition</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create two columns, which will tell the plot where the text should be placed.</span>
+<span class="sd">    </span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.DataFrame): DataFrame containing a Name column. </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame with the new Columns. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">Column</span><span class="o">.</span><span class="n">TEXTPOSITION_COME</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">Column</span><span class="o">.</span><span class="n">NAME</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">SPECIAL_ORIENTATION_ENERGY</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">DEFAULT_TEXT_POSITION</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">data</span><span class="p">[</span><span class="n">Column</span><span class="o">.</span><span class="n">TEXTPOSITION_LUMI</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">Column</span><span class="o">.</span><span class="n">NAME</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">SPECIAL_ORIENTATION_LUMI</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">DEFAULT_TEXT_POSITION</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">data</span><span class="p">[</span><span class="n">Column</span><span class="o">.</span><span class="n">TEXTPOSITION_LVCOME</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">Column</span><span class="o">.</span><span class="n">NAME</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">SPECIAL_ORIENTATION_LUMI_ENERGY</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">DEFAULT_TEXT_POSITION</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

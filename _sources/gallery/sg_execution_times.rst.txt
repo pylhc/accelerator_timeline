@@ -1,0 +1,15 @@
+
+:orphan:
+
+.. _sphx_glr_gallery_sg_execution_times:
+
+
+Computation times
+=================
+**00:11.100** total execution time for **gallery** files:
+
++---------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_gallery_export_charts.py` (``export_charts.py``)           | 00:09.822 | 0.0 MB |
++---------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_gallery_interactive_charts.py` (``interactive_charts.py``) | 00:01.278 | 0.0 MB |
++---------------------------------------------------------------------------+-----------+--------+

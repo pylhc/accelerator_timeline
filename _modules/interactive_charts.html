@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>interactive_charts &mdash; accelerator_timeline 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/omc_logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/export_charts.html">Export Accelerator Timeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/interactive_charts.html">Interactive Accelerator Timeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gallery/interactive_charts.html#preparations">Preparations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery/interactive_charts.html#energy-timeline">Energy Timeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery/interactive_charts.html#luminosity-timeline">Luminosity timeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery/interactive_charts.html#luminosity-vs-energy">Luminosity vs. Energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery/interactive_charts.html#save-plots">Save plots</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Accelerator Charts Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gallery/export_charts.html">Export Accelerator Timeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery/interactive_charts.html">Interactive Accelerator Timeline</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Scripts API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../scripts.html#main-scripts">Main Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scripts.html#utilities">Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">accelerator_timeline</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">interactive_charts</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  
+  
+           <div itemprop="articleBody">
+             
+  <h1>Source code for interactive_charts</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Interactive Accelerator Timeline</span>
+<span class="sd">********************************</span>
+
+<span class="sd">This script allows you to interactively explore the accelerator data,</span>
+<span class="sd">either by running the script and viewing the plots in a browser,</span>
+<span class="sd">by running the script in interactive-mode e.g. in vscode </span>
+<span class="sd">or by checking the from this script generated gallery.</span>
+
+<span class="sd">To run the script, make sure your environment has the requirements </span>
+<span class="sd">of `requirements_interactive_charts.txt` installed.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">#%%</span>
+<span class="c1"># Preparations </span>
+<span class="c1"># ------------</span>
+<span class="c1"># </span>
+<span class="c1"># Import modules and define plotting function.</span>
+<span class="c1"># This code is omitted in the interactive gallery, so that you can immediately enjoy the interactive plots below.</span>
+<span class="c1"># Check `interactive.py &lt;https://github.com/pylhc/accelerator_timeline/blob/master/interactive.py&gt;`_ </span>
+<span class="c1"># for the full example code.</span>
+<span class="c1">#</span>
+
+<span class="c1"># No code to see here in the interactive gallery or the generated jupyter notebook.</span>
+<span class="c1"># sphinx_gallery_start_ignore</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">plotly</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="kn">from</span> <span class="nn">utilities.csv_reader</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">import_collider_data</span>
+<span class="kn">from</span> <span class="nn">utilities.plot_helper</span> <span class="kn">import</span> <span class="p">(</span><span class="n">PARTICLE_TYPES</span><span class="p">,</span> <span class="n">EnergyConfiguration</span><span class="p">,</span> <span class="n">LuminosityConfiguration</span><span class="p">,</span>
+                                   <span class="n">LuminosityOverEnergyConfiguration</span><span class="p">,</span> <span class="n">PlotConfiguration</span><span class="p">,</span>
+                                   <span class="n">assign_textposition</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">utilities.sphinx_helper</span> <span class="kn">import</span> <span class="n">get_gallery_dir</span><span class="p">,</span> <span class="n">is_interactive</span><span class="p">,</span> <span class="n">is_sphinx_build</span>
+
+<span class="c1"># Hack for rendering LaTeX in VSCode </span>
+<span class="c1"># (see https://github.com/microsoft/vscode-jupyter/issues/8131#issuecomment-1589961116)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">is_sphinx_build</span><span class="p">()</span> <span class="ow">and</span> <span class="n">is_interactive</span><span class="p">():</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span>
+        <span class="s1">&#39;&lt;script type=&quot;text/javascript&quot; async src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_SVG&quot;&gt;&lt;/script&gt;&#39;</span>
+    <span class="p">))</span>
+
+<span class="c1"># Import Data ---</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">import_collider_data</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">assign_textposition</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Plotting Function ---</span>
+<span class="c1"># This is the definition of the actual plotting function, </span>
+<span class="c1"># which creates the interactive plotly plots</span>
+
+<div class="viewcode-block" id="plot">
+<a class="viewcode-back" href="../scripts.html#interactive_charts.plot">[docs]</a>
+<span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">PlotConfiguration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate interactive plots with plotly, based on the given configuration, </span>
+<span class="sd">    which defines the columns to use and the text positions.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.DataFrame): DataFrame containing the (modified) accelerator timeline data</span>
+<span class="sd">        configuration (PlotConfiguration): See :class:`utilities.plot_helper.PlotConfiguration`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        go.Figure: plotly figure </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">particle_type</span> <span class="ow">in</span> <span class="n">PARTICLE_TYPES</span><span class="p">:</span>
+        <span class="n">particle_mask</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">Column</span><span class="o">.</span><span class="n">TYPE</span><span class="p">]</span> <span class="o">==</span> <span class="n">particle_type</span><span class="o">.</span><span class="n">shorthand</span>
+        <span class="k">for</span> <span class="n">has_been_built</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">has_been_built</span><span class="p">:</span>
+                <span class="n">builtmask</span><span class="p">,</span> <span class="n">marker_suffix</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">Column</span><span class="o">.</span><span class="n">BUILT</span><span class="p">],</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;built&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">builtmask</span><span class="p">,</span> <span class="n">marker_suffix</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="o">~</span><span class="n">data</span><span class="p">[</span><span class="n">Column</span><span class="o">.</span><span class="n">BUILT</span><span class="p">],</span> <span class="s2">&quot;-open&quot;</span><span class="p">,</span> <span class="s2">&quot;not built&quot;</span>
+            
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">particle_mask</span> <span class="o">&amp;</span> <span class="n">builtmask</span>
+
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="n">builtmask</span><span class="p">,</span> <span class="n">configuration</span><span class="o">.</span><span class="n">xcolumn</span><span class="p">],</span> 
+                <span class="n">y</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="n">builtmask</span><span class="p">,</span> <span class="n">configuration</span><span class="o">.</span><span class="n">ycolumn</span><span class="p">],</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">legend</span><span class="p">,</span>
+                <span class="n">legendgroup</span><span class="o">=</span><span class="n">particle_type</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">legendgrouptitle_text</span><span class="o">=</span><span class="n">particle_type</span><span class="o">.</span><span class="n">latex</span><span class="p">,</span>
+                <span class="n">text</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">Column</span><span class="o">.</span><span class="n">NAME</span><span class="p">],</span>
+                <span class="n">textposition</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">configuration</span><span class="o">.</span><span class="n">textposition</span><span class="p">],</span>
+                <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers+text&quot;</span><span class="p">,</span> 
+                <span class="n">marker</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;symbol&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">particle_type</span><span class="o">.</span><span class="n">symbol</span><span class="si">}{</span><span class="n">marker_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> 
+                        <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">particle_type</span><span class="o">.</span><span class="n">color</span><span class="p">},</span> 
+                <span class="n">customdata</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">([</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">Column</span><span class="o">.</span><span class="n">NAME</span><span class="p">],</span>
+                    <span class="p">[</span><span class="n">particle_type</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">mask</span><span class="p">),</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">Column</span><span class="o">.</span><span class="n">COM_ENERGY</span><span class="p">],</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">Column</span><span class="o">.</span><span class="n">LUMINOSITY</span><span class="p">],</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">Column</span><span class="o">.</span><span class="n">LENGTH</span><span class="p">],</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">Column</span><span class="o">.</span><span class="n">YEARS</span><span class="p">],</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">Column</span><span class="o">.</span><span class="n">INSTITUTE</span><span class="p">],</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">Column</span><span class="o">.</span><span class="n">COUNTRY</span><span class="p">],</span>
+                <span class="p">])</span>
+            <span class="p">))</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span>
+        <span class="n">hovertemplate</span><span class="o">=</span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="s2">&quot;%</span><span class="si">{customdata[0]}</span><span class="s2"> (%</span><span class="si">{customdata[6]}</span><span class="s2">, %</span><span class="si">{customdata[7]}</span><span class="s2">)&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Particles: %</span><span class="si">{customdata[1]}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Center-of-Mass Energy [GeV]: %</span><span class="si">{customdata[2]}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Luminosity [cm^-2s^-1]: %</span><span class="si">{customdata[3]}</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="c1"># sadly plotly does not support latex in hover</span>
+            <span class="s2">&quot;Length [m]: %</span><span class="si">{customdata[4]}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Operation: %</span><span class="si">{customdata[5]}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;&lt;extra&gt;&lt;/extra&gt;&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">logx</span><span class="p">,</span> <span class="n">logy</span> <span class="o">=</span> <span class="s2">&quot;x&quot;</span> <span class="ow">in</span> <span class="n">configuration</span><span class="o">.</span><span class="n">logscale</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span> <span class="ow">in</span> <span class="n">configuration</span><span class="o">.</span><span class="n">logscale</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="n">configuration</span><span class="o">.</span><span class="n">xlabel</span><span class="p">,</span> 
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;log&quot;</span> <span class="k">if</span> <span class="n">logx</span> <span class="k">else</span> <span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">dtick</span><span class="o">=</span><span class="mi">1</span> <span class="k">if</span> <span class="n">logx</span> <span class="k">else</span> <span class="mi">10</span><span class="p">,</span> 
+        <span class="n">minor</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">dtick</span><span class="o">=</span><span class="s2">&quot;D1&quot;</span> <span class="k">if</span> <span class="n">logx</span> <span class="k">else</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="s2">&quot;outside&quot;</span><span class="p">),</span>
+        <span class="n">ticks</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span><span class="p">,</span>
+        <span class="n">showline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+        <span class="n">gridcolor</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span>
+    <span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="n">configuration</span><span class="o">.</span><span class="n">ylabel</span><span class="p">,</span> 
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;log&quot;</span> <span class="k">if</span> <span class="s2">&quot;y&quot;</span> <span class="ow">in</span> <span class="n">configuration</span><span class="o">.</span><span class="n">logscale</span> <span class="k">else</span> <span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">ticks</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span><span class="p">,</span>
+        <span class="n">dtick</span><span class="o">=</span><span class="mi">1</span> <span class="k">if</span> <span class="n">logy</span> <span class="k">else</span> <span class="mi">10</span><span class="p">,</span> 
+        <span class="n">minor</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">dtick</span><span class="o">=</span><span class="s2">&quot;D1&quot;</span> <span class="k">if</span> <span class="n">logy</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="s2">&quot;outside&quot;</span><span class="p">,</span> <span class="n">showgrid</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="n">showline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+        <span class="n">gridcolor</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span>
+        <span class="c1"># tickformat=&#39;e&#39;,</span>
+    <span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">plot_bgcolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+<span class="c1"># sphinx_gallery_end_ignore</span>
+
+<span class="c1">#%%</span>
+<span class="c1"># Energy Timeline</span>
+<span class="c1"># ---------------</span>
+<span class="c1"># </span>
+
+<span class="n">fig_com</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">EnergyConfiguration</span><span class="p">)</span>
+<span class="c1"># sphinx_gallery_start_ignore</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">is_sphinx_build</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_interactive</span><span class="p">():</span>
+    <span class="n">fig_com</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">fig_com</span>
+<span class="c1"># sphinx_gallery_end_ignore</span>
+
+<span class="c1">#%%</span>
+<span class="c1"># Luminosity timeline</span>
+<span class="c1"># -------------------</span>
+<span class="c1">#</span>
+
+<span class="n">fig_lumi</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">LuminosityConfiguration</span><span class="p">)</span>
+<span class="c1"># sphinx_gallery_start_ignore</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">is_sphinx_build</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_interactive</span><span class="p">():</span>
+    <span class="n">fig_lumi</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">fig_lumi</span>
+<span class="c1"># sphinx_gallery_end_ignore</span>
+
+<span class="c1">#%%</span>
+<span class="c1"># Luminosity vs. Energy </span>
+<span class="c1"># ---------------------</span>
+<span class="c1">#</span>
+
+<span class="n">fig_lumi_energy</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">LuminosityOverEnergyConfiguration</span><span class="p">)</span>
+<span class="c1"># sphinx_gallery_start_ignore</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">is_sphinx_build</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_interactive</span><span class="p">():</span>
+    <span class="n">fig_lumi_energy</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">fig_lumi_energy</span>
+<span class="c1"># sphinx_gallery_end_ignore</span>
+
+<span class="c1">#%% </span>
+<span class="c1"># Save plots</span>
+<span class="c1"># ----------</span>
+<span class="c1"># </span>
+<span class="c1"># Save the plots as PDF and PNG.</span>
+
+<span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;images&quot;</span><span class="p">)</span>
+<span class="c1"># sphinx_gallery_start_ignore</span>
+<span class="k">if</span> <span class="n">is_sphinx_build</span><span class="p">():</span>
+    <span class="n">output_dir</span> <span class="o">=</span> <span class="n">get_gallery_dir</span><span class="p">()</span>
+<span class="c1"># sphinx_gallery_end_ignore</span>
+
+<span class="n">plotly</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">fig_com</span><span class="p">,</span> <span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;energy-plotly.pdf&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">)</span>
+<span class="n">plotly</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">fig_com</span><span class="p">,</span> <span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;energy-plotly.png&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">)</span>
+<span class="n">plotly</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">fig_lumi</span><span class="p">,</span> <span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;luminosity-plotly.pdf&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">)</span>
+<span class="n">plotly</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">fig_lumi</span><span class="p">,</span> <span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;luminosity-plotly.png&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">)</span>
+<span class="n">plotly</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">fig_lumi_energy</span><span class="p">,</span> <span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;luminosity-vs-energy-plotly.pdf&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">)</span>
+<span class="n">plotly</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">fig_lumi_energy</span><span class="p">,</span> <span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;luminosity-vs-energy-plotly.png&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># sphinx_gallery_thumbnail_path = &#39;gallery/luminosity-vs-energy-plotly.png&#39;</span>
+</pre></div>
+
+           </div>
+          </div>
+
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
