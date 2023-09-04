@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>utilities.plot_helper &mdash; accelerator_timeline 1.0.0 documentation</title>
+  <title>utilities.plot_helper &mdash; accelerator_timeline 1.0.1 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
@@ -19,7 +19,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/documentation_options.js?v=292eb321"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -120,7 +120,7 @@
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="kn">from</span> <span class="nn">utilities.csv_reader</span> <span class="kn">import</span> <span class="n">Column</span>
+<span class="kn">from</span> <span class="nn">utilities.csv_reader</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">import_collider_data</span>
 
 <span class="c1"># Main Plot Configurations  ----------------------------------------------------</span>
 
@@ -177,6 +177,7 @@
 
 <span class="n">HADRON_SYMBOL</span> <span class="o">=</span> <span class="s2">&quot;diamond&quot;</span>
 <span class="n">LEPTON_SYMBOL</span> <span class="o">=</span> <span class="s2">&quot;circle&quot;</span>
+<span class="n">OTHER_SYMBOL</span> <span class="o">=</span> <span class="s2">&quot;square&quot;</span>
 
 <span class="n">PLOTLY_MPL_SYMBOL_MAP</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;diamond&quot;</span><span class="p">:</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span>
@@ -191,8 +192,29 @@
         <span class="n">ParticleTypeMap</span><span class="p">(</span><span class="s2">&quot;proton-antiproton&quot;</span><span class="p">,</span> <span class="s2">&quot;p+p-&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$p\bar</span><span class="si">{p}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">HADRON_SYMBOL</span><span class="p">,</span> <span class="s2">&quot;#2ca02c&quot;</span><span class="p">),</span>
         <span class="n">ParticleTypeMap</span><span class="p">(</span><span class="s2">&quot;electron-electron&quot;</span><span class="p">,</span> <span class="s2">&quot;e-e-&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$e^-e^-$&quot;</span><span class="p">,</span> <span class="n">LEPTON_SYMBOL</span><span class="p">,</span> <span class="s2">&quot;#1f77b4&quot;</span><span class="p">),</span>
         <span class="n">ParticleTypeMap</span><span class="p">(</span><span class="s2">&quot;electron-positron&quot;</span><span class="p">,</span> <span class="s2">&quot;e+e-&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$e^+e^-$&quot;</span><span class="p">,</span> <span class="n">LEPTON_SYMBOL</span><span class="p">,</span> <span class="s2">&quot;#ff7f0e&quot;</span><span class="p">),</span>
+        <span class="n">ParticleTypeMap</span><span class="p">(</span><span class="s2">&quot;electron-proton&quot;</span><span class="p">,</span> <span class="s2">&quot;e-p+&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$e^-p$&quot;</span><span class="p">,</span> <span class="n">OTHER_SYMBOL</span><span class="p">,</span> <span class="s2">&quot;#DD34BE&quot;</span><span class="p">),</span>
         <span class="n">ParticleTypeMap</span><span class="p">(</span><span class="s2">&quot;muon-antimuon&quot;</span><span class="p">,</span> <span class="s2">&quot;mu+mu-&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\mu^+\mu^-$&quot;</span><span class="p">,</span> <span class="n">LEPTON_SYMBOL</span><span class="p">,</span> <span class="s2">&quot;#9467bd&quot;</span><span class="p">),</span>
 <span class="p">]</span>
+
+<div class="viewcode-block" id="check_all_types_accounted_for">
+<a class="viewcode-back" href="../../scripts.html#utilities.plot_helper.check_all_types_accounted_for">[docs]</a>
+<span class="k">def</span> <span class="nf">check_all_types_accounted_for</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function to check if all particle types in the list are accounted for and hence will be plotted.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.DataFrame): DataFrame containing the accelerator timeline data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+        <span class="n">data</span> <span class="o">=</span> <span class="n">import_collider_data</span><span class="p">()</span>
+
+    <span class="n">particle_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">ptype</span><span class="o">.</span><span class="n">shorthand</span> <span class="k">for</span> <span class="n">ptype</span> <span class="ow">in</span> <span class="n">PARTICLE_TYPES</span><span class="p">]</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">ptype</span> <span class="k">for</span> <span class="n">ptype</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">Column</span><span class="o">.</span><span class="n">TYPE</span><span class="p">])</span> <span class="k">if</span> <span class="n">ptype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">particle_types</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The following particle-types are missing, &quot;</span>
+                         <span class="s2">&quot;please add them to the PARTICLE_TYPES list in utilities.plot_helper: &quot;</span>
+                         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
 
 
 <span class="c1"># Text Positions ---------------------------------------------------------------</span>
@@ -230,6 +252,7 @@
     <span class="s2">&quot;FPP 27TeV&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom right&quot;</span><span class="p">,</span>
     <span class="s2">&quot;FCC-ee ZH&quot;</span><span class="p">:</span> <span class="s2">&quot;middle left&quot;</span><span class="p">,</span>
     <span class="s2">&quot;FCC-hh&quot;</span><span class="p">:</span> <span class="s2">&quot;top center&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EIC&quot;</span><span class="p">:</span> <span class="s2">&quot;middle left&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="c1"># manual text orientation for Lumi vs Energy plots</span>
@@ -248,6 +271,7 @@
     <span class="s2">&quot;ILC v3&quot;</span><span class="p">:</span> <span class="s2">&quot;top center&quot;</span><span class="p">,</span>
     <span class="s2">&quot;CLIC380&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom center&quot;</span><span class="p">,</span>
     <span class="s2">&quot;FCC-hh&quot;</span><span class="p">:</span> <span class="s2">&quot;top center&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EIC&quot;</span><span class="p">:</span> <span class="s2">&quot;bottom center&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
 

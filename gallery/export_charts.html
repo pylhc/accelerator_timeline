@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Export Accelerator Timeline &mdash; accelerator_timeline 1.0.0 documentation</title>
+  <title>Export Accelerator Timeline &mdash; accelerator_timeline 1.0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
@@ -20,7 +20,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../_static/documentation_options.js?v=292eb321"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -138,7 +138,7 @@ of <code class="xref py py-obj docutils literal notranslate"><span class="pre">r
 <span class="kn">from</span> <span class="nn">utilities.csv_reader</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">import_collider_data</span>
 <span class="kn">from</span> <span class="nn">utilities.plot_helper</span> <span class="kn">import</span> <span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">PARTICLE_TYPES</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">PLOTLY_MPL_SYMBOL_MAP</span></a><span class="p">,</span> <span class="n">EnergyConfiguration</span><span class="p">,</span>
                                    <span class="n">LuminosityConfiguration</span><span class="p">,</span> <span class="n">LuminosityOverEnergyConfiguration</span><span class="p">,</span>
-                                   <a href="https://docs.python.org/3/library/typing.html#typing.Protocol" title="typing.Protocol" class="sphx-glr-backref-module-typing sphx-glr-backref-type-py-class"><span class="n">PlotConfiguration</span></a><span class="p">,</span> <span class="n">assign_textposition</span><span class="p">)</span>
+                                   <a href="https://docs.python.org/3/library/typing.html#typing.Protocol" title="typing.Protocol" class="sphx-glr-backref-module-typing sphx-glr-backref-type-py-class"><span class="n">PlotConfiguration</span></a><span class="p">,</span> <span class="n">assign_textposition</span><span class="p">,</span> <span class="n">check_all_types_accounted_for</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">utilities.sphinx_helper</span> <span class="kn">import</span> <span class="n">get_gallery_dir</span><span class="p">,</span> <span class="n">is_sphinx_build</span>
 
 
@@ -225,6 +225,7 @@ of <code class="xref py py-obj docutils literal notranslate"><span class="pre">r
 
     <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.core.frame.DataFrame" class="sphx-glr-backref-module-pandas-core-frame sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">data</span></a> <span class="o">=</span> <span class="n">import_collider_data</span><span class="p">()</span>
     <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.core.frame.DataFrame" class="sphx-glr-backref-module-pandas-core-frame sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">data</span></a> <span class="o">=</span> <span class="n">assign_textposition</span><span class="p">(</span><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.core.frame.DataFrame" class="sphx-glr-backref-module-pandas-core-frame sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">data</span></a><span class="p">)</span>
+    <span class="n">check_all_types_accounted_for</span><span class="p">(</span><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.core.frame.DataFrame" class="sphx-glr-backref-module-pandas-core-frame sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">data</span></a><span class="p">)</span>
 
     <a href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig_com</span></a> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.core.frame.DataFrame" class="sphx-glr-backref-module-pandas-core-frame sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">data</span></a><span class="p">,</span> <span class="n">EnergyConfiguration</span><span class="p">)</span>
     <a href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure.savefig" title="matplotlib.figure.Figure.savefig" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-method"><span class="n">fig_com</span><span class="o">.</span><span class="n">savefig</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/pathlib.html#pathlib.PosixPath" title="pathlib.PosixPath" class="sphx-glr-backref-module-pathlib sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">output_dir</span></a> <span class="o">/</span> <span class="s2">&quot;energy.pdf&quot;</span><span class="p">)</span>
@@ -241,7 +242,7 @@ of <code class="xref py py-obj docutils literal notranslate"><span class="pre">r
     <span class="c1"># plt.show()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 8.818 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 11.433 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-export-charts-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/a3e0be0bf8d99a8bc1746d8344c38a82/export_charts.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">export_charts.py</span></code></a></p>

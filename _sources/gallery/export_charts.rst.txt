@@ -25,7 +25,7 @@ matplotlib.
 To run the script, make sure your environment has the requirements 
 of `requirements_export_charts.txt` installed.
 
-.. GENERATED FROM PYTHON SOURCE LINES 10-125
+.. GENERATED FROM PYTHON SOURCE LINES 10-126
 
 
 
@@ -72,7 +72,7 @@ of `requirements_export_charts.txt` installed.
     from utilities.csv_reader import Column, import_collider_data
     from utilities.plot_helper import (PARTICLE_TYPES, PLOTLY_MPL_SYMBOL_MAP, EnergyConfiguration,
                                        LuminosityConfiguration, LuminosityOverEnergyConfiguration,
-                                       PlotConfiguration, assign_textposition)
+                                       PlotConfiguration, assign_textposition, check_all_types_accounted_for)
     from utilities.sphinx_helper import get_gallery_dir, is_sphinx_build
 
 
@@ -159,6 +159,7 @@ of `requirements_export_charts.txt` installed.
 
         data = import_collider_data()
         data = assign_textposition(data)
+        check_all_types_accounted_for(data)
     
         fig_com = plot(data, EnergyConfiguration)
         fig_com.savefig(output_dir / "energy.pdf")
@@ -178,7 +179,7 @@ of `requirements_export_charts.txt` installed.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 8.818 seconds)
+   **Total running time of the script:** (0 minutes 11.433 seconds)
 
 
 .. _sphx_glr_download_gallery_export_charts.py:
