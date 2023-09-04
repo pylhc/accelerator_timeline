@@ -1,0 +1,9 @@
+# 👇️ include packages for the scripts
+-r ../requirements_export_charts.txt
+-r ../requirements_interactive_charts.txt
+
+# packages for the doc
+sphinx
+sphinx_rtd_theme
+sphinx-gallery
+sphinx-copybutton
