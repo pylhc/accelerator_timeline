@@ -25,7 +25,7 @@ warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
 warnings.filterwarnings(
     "ignore",
     category=UserWarning,
-    message="Matplotlib is currently using agg, which is a" " non-GUI backend, so cannot show the figure.",
+    message="Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.",
 )
 
 
@@ -46,7 +46,7 @@ os.environ[SPHINX_BUILD_ENVIRON] = '1'
 
 # Copy accelerator data file
 shutil.copy2(
-    TOPLEVEL_DIR / "accelerator-parameters.csv", 
+    TOPLEVEL_DIR / "accelerator-parameters.csv",
     TOPLEVEL_DIR / "doc" / "accelerator-parameters.csv"
 )
 
@@ -113,7 +113,7 @@ master_doc = "index"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "docs", "docker", "tests", ".github", ".vscode"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "docs", "docker", "tests", ".github", ".vscode", "tst_*"]
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -547,7 +547,7 @@ texinfo_documents = [
 # -- Autodoc Configuration ---------------------------------------------------
 
 # Add here all modules to be mocked up. When the dependencies are not met
-# at building time. 
+# at building time.
 autodoc_mock_imports = []
 
 # -- Instersphinx Configuration ----------------------------------------------

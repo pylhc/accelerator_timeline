@@ -62,7 +62,7 @@ interactive_charts = [
     "numpy",
     "ipython",
     "ipykernel",
-    "kaleido",
+    "kaleido==0.1.*",  # newer versions requrie chrome installed
 ]
 
 doc = [
