@@ -4,19 +4,20 @@ Interactive Accelerator Timeline
 
 This script allows you to interactively explore the accelerator data,
 either by running the script and viewing the plots in a browser,
-by running the script in interactive-mode e.g. in vscode 
+by running the script in interactive-mode e.g. in vscode
 or by checking the from this script generated gallery.
 
-To run the script, make sure your environment has the requirements 
-of `requirements_interactive_charts.txt` installed.
+To run the script, make sure your environment has the requirements
+of `interactive_charts` installed,
+e.g. via `uv pip install -r pyproject.toml --extra interactive_charts`.
 """
 #%%
-# Preparations 
+# Preparations
 # ------------
-# 
+#
 # Import modules and define plotting function.
 # This code is omitted in the interactive gallery, so that you can immediately enjoy the interactive plots below.
-# Check `interactive.py <https://github.com/pylhc/accelerator_timeline/blob/master/interactive_charts.py>`_ 
+# Check `interactive.py <https://github.com/pylhc/accelerator_timeline/blob/master/interactive_charts.py>`_
 # for the full example code.
 #
 
@@ -35,7 +36,7 @@ from utilities.plot_helper import (PARTICLE_TYPES, EnergyConfiguration, Luminosi
                                    assign_textposition, check_all_types_accounted_for)
 from utilities.sphinx_helper import get_gallery_dir, is_interactive, is_sphinx_build
 
-# Hack for rendering LaTeX in VSCode 
+# Hack for rendering LaTeX in VSCode
 # (see https://github.com/microsoft/vscode-jupyter/issues/8131#issuecomment-1589961116)
 if not is_sphinx_build() and is_interactive():
     display(HTML(
@@ -48,11 +49,11 @@ data = assign_textposition(data)
 check_all_types_accounted_for(data)
 
 # Plotting Function ---
-# This is the definition of the actual plotting function, 
+# This is the definition of the actual plotting function,
 # which creates the interactive plotly plots
 
 def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> go.Figure:
-    """Generate interactive plots with plotly, based on the given configuration, 
+    """Generate interactive plots with plotly, based on the given configuration,
     which defines the columns to use and the text positions.
 
     Args:
@@ -60,7 +61,7 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> go.Figure:
         configuration (PlotConfiguration): See :class:`utilities.plot_helper.PlotConfiguration`
 
     Returns:
-        go.Figure: plotly figure 
+        go.Figure: plotly figure
     """
     fig = go.Figure()
 
@@ -71,20 +72,20 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> go.Figure:
                 builtmask, marker_suffix, legend = data[Column.BUILT], "", "built"
             else:
                 builtmask, marker_suffix, legend = ~data[Column.BUILT], "-open", "not built"
-            
+
             mask = particle_mask & builtmask
 
             fig.add_trace(go.Scatter(
-                x=data.loc[mask & builtmask, configuration.xcolumn], 
+                x=data.loc[mask & builtmask, configuration.xcolumn],
                 y=data.loc[mask & builtmask, configuration.ycolumn],
                 name=legend,
                 legendgroup=particle_type.name,
                 legendgrouptitle_text=particle_type.latex,
                 text=data.loc[mask, Column.NAME],
                 textposition=data.loc[mask, configuration.textposition],
-                mode="markers+text", 
-                marker={"symbol": f"{particle_type.symbol}{marker_suffix}", 
-                        "color": particle_type.color}, 
+                mode="markers+text",
+                marker={"symbol": f"{particle_type.symbol}{marker_suffix}",
+                        "color": particle_type.color},
                 customdata=np.transpose([
                     data.loc[mask, Column.NAME],
                     [particle_type.name] * sum(mask),
@@ -110,9 +111,9 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> go.Figure:
 
     logx, logy = "x" in configuration.logscale, "y" in configuration.logscale
     fig.update_xaxes(
-        title=configuration.xlabel, 
+        title=configuration.xlabel,
         type="log" if logx else "linear",
-        dtick=1 if logx else 10, 
+        dtick=1 if logx else 10,
         minor=dict(dtick="D1" if logx else 1, ticks="outside"),
         ticks='outside',
         showline=True,
@@ -120,10 +121,10 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> go.Figure:
         gridcolor='lightgrey'
     )
     fig.update_yaxes(
-        title=configuration.ylabel, 
+        title=configuration.ylabel,
         type="log" if "y" in configuration.logscale else "linear",
         ticks='outside',
-        dtick=1 if logy else 10, 
+        dtick=1 if logy else 10,
         minor=dict(dtick="D1" if logy else None, ticks="outside", showgrid=False),
         showline=True,
         linecolor='black',
@@ -140,7 +141,7 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> go.Figure:
 #%%
 # Energy Timeline
 # ---------------
-# 
+#
 
 fig_com = plot(data, EnergyConfiguration)
 # sphinx_gallery_start_ignore
@@ -162,7 +163,7 @@ fig_lumi
 # sphinx_gallery_end_ignore
 
 #%%
-# Luminosity vs. Energy 
+# Luminosity vs. Energy
 # ---------------------
 #
 
@@ -173,10 +174,10 @@ if not is_sphinx_build() and not is_interactive():
 fig_lumi_energy
 # sphinx_gallery_end_ignore
 
-#%% 
+#%%
 # Save plots
 # ----------
-# 
+#
 # Save the plots as PDF and PNG.
 
 output_dir = Path("images")
