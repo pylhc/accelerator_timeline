@@ -4,23 +4,20 @@
 [![GitHub release](https://img.shields.io/github/release/pylhc/accelerator_timeline.svg?style=popout)](https://github.com/pylhc/accelerator_timeline/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8316137.svg)](https://doi.org/10.5281/zenodo.8316137)
 
-In this package, the main parameters of major historical, modern and possible future accelerators are 
+In this package, the main parameters of major historical, modern and possible future accelerators are
 collected, including references to the origin of the collected data, into a single csv:
 
- -  [accelerator-parameters.csv](accelerator-parameters.csv).
+- [accelerator-parameters.csv](accelerator-parameters.csv).
 
-
-
-## Installation 
+## Installation
 
 This package is mostly for collecting and sharing the data of the accelerators within
-the CSV file. 
+the CSV file.
 
-
-To get the data, either download the [accelerator-parameters.csv](accelerator-parameters.csv) directly, 
+To get the data, either download the [accelerator-parameters.csv](accelerator-parameters.csv) directly,
 or clone the repository via `git`, e.g.::
 
-```
+```bash
 git clone https://github.com/pylhc/accelerator_timeline.git
 ```
 
@@ -28,16 +25,23 @@ git clone https://github.com/pylhc/accelerator_timeline.git
 
 In addition, small python scripts are provided to explore the data via and create Livingston-like plots.
 These charts are available interactively at:
- 
- - [pylhc.github.io/accelerator_timeline](https://pylhc.github.io/accelerator_timeline).
+
+- [pylhc.github.io/accelerator_timeline](https://pylhc.github.io/accelerator_timeline).
 
 The python code itself can be found at
 
- - [interactive_charts.py](interactive_charts.py), creating the interactive charts via plotly.
- - [export_charts.py](export_charts.py), making publication-grade exports to pdf via matplotlib.
+- [interactive_charts.py](interactive_charts.py), creating the interactive charts via plotly.
+- [export_charts.py](export_charts.py), making publication-grade exports to pdf via matplotlib.
 
 The requirements for the scripts can be found in the respective `requirements_*.txt` file.
 
 ![Center of Mass](images/energy.png)
 ![Luminosity](images/luminosity.png)
 ![LuminosityVsEnergy](images/luminosity-vs-energy.png)
+
+## Note for Developers
+
+Updating the data in the CSV will automatically update the charts in the
+[pylhc.github.io/accelerator_timeline](https://pylhc.github.io/accelerator_timeline) website via GitHub Actions.
+The pictures in the `images/` folder (which are also linked in this `README`) are **not** automatically generated
+and need to be updated manually by running the `export_charts.py` script and committing the changes.
