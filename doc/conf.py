@@ -10,11 +10,12 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 
-import pathlib
 import os
+import pathlib
 import shutil
 import sys
 import warnings
+from functools import partial
 
 # ignore numpy warnings, see:
 # https://stackoverflow.com/questions/40845304/runtimewarning-numpy-dtype-size-changed-may-indicate-binary-incompatibility
@@ -40,7 +41,8 @@ with ABOUT_FILE.open("r") as f:
     exec(f.read(), ABOUT_accelerator_timeline)
 
 # Set environment variable for scripts to check if we are in sphinx-mode
-from utilities.sphinx_helper import SPHINX_BUILD_ENVIRON
+from utilities.sphinx_helper import SPHINX_BUILD_ENVIRON  # noqa: E402
+
 os.environ[SPHINX_BUILD_ENVIRON] = '1'
 
 
@@ -113,7 +115,7 @@ master_doc = "index"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "docs", "docker", "tests", ".github", ".vscode", "tst_*"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "docs", "docker", "tests", ".github", ".vscode"]
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -189,33 +191,28 @@ todo_include_todos = True
 # bibtex_reference_style = "label"
 
 # -- Setup scrapers for the gallery ------------------------------------------
-from plotly.io._sg_scraper import plotly_sg_scraper
-import plotly.io as pio
+import plotly.io as pio  # noqa: E402
+from plotly.io._sg_scraper import plotly_sg_scraper  # noqa: E402
+
 pio.renderers.default = 'sphinx_gallery'
 
 # To use SVG outputs when scraping matplotlib figures for the sphinx-gallery
-from sphinx_gallery.scrapers import matplotlib_scraper
-from sphinx_gallery.sorting import ExampleTitleSortKey
-class matplotlib_svg_scraper(object):
-    def __repr__(self):
-        return self.__class__.__name__
-
-    def __call__(self, *args, **kwargs):
-        return matplotlib_scraper(*args, format="svg", **kwargs)
+from sphinx_gallery.scrapers import matplotlib_scraper  # noqa: E402
+from sphinx_gallery.sorting import ExampleTitleSortKey  # noqa: E402
 
 # Config for the matplotlib plot directive
 plot_formats = [("svg", 250)]
 
 # image_scrapers = (matplotlib_svg_scraper(), plotly_sg_scraper,)
-image_scrapers = (matplotlib_svg_scraper(),)
+image_scrapers = (partial(matplotlib_scraper, format="svg"), plotly_sg_scraper)
 
 # -- Configuration for the sphinx-gallery extension -------------------------------
 sphinx_gallery_conf = {
     "examples_dirs": ["../"],  # directory where to find plotting scripts
     "gallery_dirs": ["gallery"],  # directory where to store generated plots
     "filename_pattern": "^((?!sgskip).)*$",  # which files to execute
-    "subsection_order": ExampleTitleSortKey,
-    "within_subsection_order": ExampleTitleSortKey,
+    "subsection_order": ExampleTitleSortKey("../"),
+    "within_subsection_order": ExampleTitleSortKey("../"),
     "reference_url": {"accelerator_timeline": None},  # Sets up intersphinx in gallery code
     "backreferences_dir": "gen_modules/backreferences",  # where function/class granular galleries are stored
     # Modules for which function/class level galleries are created
@@ -228,6 +225,7 @@ sphinx_gallery_conf = {
     "compress_images": ("images", "thumbnails", "-o1"),
     "only_warn_on_example_error": True,  # keep the build going if an example fails, very important for doc workflow
     "download_all_examples": False,
+    "ignore_pattern": r"(^tst_.*|^_.*)",  # ignore test/private files
 }
 
 # Config for the sphinx_panels extension
@@ -247,8 +245,8 @@ html_theme = "sphinx_rtd_theme"
 # documentation.
 html_theme_options = {
     "collapse_navigation": False,
-    "display_version": True,
     "logo_only": True,
+    "version_selector": True,
     "navigation_depth": 2,
 }
 

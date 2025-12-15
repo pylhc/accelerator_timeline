@@ -7,8 +7,16 @@ matplotlib.
 To run the script, make sure your environment has the requirements
 of `export_charts` installed,
 e.g. via `uv pip install -r pyproject.toml --extra export_charts`.
+This is automatically resolved when running this script via `uv run export_charts.py`.
 """
-import os
+# sphinx_gallery_start_ignore
+# /// script
+# dependencies = [
+#     "accelerator-timeline[export_charts] @ git+https://github.com/pylhc/accelerator_timeline.git",
+# ]
+# ///
+# sphinx_gallery_end_ignore
+
 from pathlib import Path
 
 import matplotlib as mpl
@@ -19,9 +27,16 @@ from matplotlib import pyplot as plt
 from matplotlib.figure import Figure
 
 from utilities.csv_reader import Column, import_collider_data
-from utilities.plot_helper import (PARTICLE_TYPES, PLOTLY_MPL_SYMBOL_MAP, EnergyConfiguration,
-                                   LuminosityConfiguration, LuminosityOverEnergyConfiguration,
-                                   PlotConfiguration, assign_textposition, check_all_types_accounted_for)
+from utilities.plot_helper import (
+    PARTICLE_TYPES,
+    PLOTLY_MPL_SYMBOL_MAP,
+    EnergyConfiguration,
+    LuminosityConfiguration,
+    LuminosityOverEnergyConfiguration,
+    PlotConfiguration,
+    assign_textposition,
+    check_all_types_accounted_for,
+)
 from utilities.sphinx_helper import get_gallery_dir, is_sphinx_build
 
 

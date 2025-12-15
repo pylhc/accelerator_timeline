@@ -10,7 +10,15 @@ or by checking the from this script generated gallery.
 To run the script, make sure your environment has the requirements
 of `interactive_charts` installed,
 e.g. via `uv pip install -r pyproject.toml --extra interactive_charts`.
+This is automatically resolved when running this script via `uv run interactive_charts.py`.
 """
+# sphinx_gallery_start_ignore
+# /// script
+# dependencies = [
+#     "accelerator-timeline[interactive_charts]  @ git+https://github.com/pylhc/accelerator_timeline.git",
+# ]
+# ///
+# sphinx_gallery_end_ignore
 #%%
 # Preparations
 # ------------
@@ -24,6 +32,7 @@ e.g. via `uv pip install -r pyproject.toml --extra interactive_charts`.
 # No code to see here in the interactive gallery or the generated jupyter notebook.
 # sphinx_gallery_start_ignore
 from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import plotly
@@ -31,10 +40,19 @@ import plotly.graph_objects as go
 from IPython.display import HTML, display
 
 from utilities.csv_reader import Column, import_collider_data
-from utilities.plot_helper import (PARTICLE_TYPES, EnergyConfiguration, LuminosityConfiguration,
-                                   LuminosityOverEnergyConfiguration, PlotConfiguration,
-                                   assign_textposition, check_all_types_accounted_for)
+from utilities.plot_helper import (
+    PARTICLE_TYPES,
+    EnergyConfiguration,
+    LuminosityConfiguration,
+    LuminosityOverEnergyConfiguration,
+    PlotConfiguration,
+    assign_textposition,
+    check_all_types_accounted_for,
+)
 from utilities.sphinx_helper import get_gallery_dir, is_interactive, is_sphinx_build
+
+if is_sphinx_build():
+    plotly.io.get_chrome()
 
 # Hack for rendering LaTeX in VSCode
 # (see https://github.com/microsoft/vscode-jupyter/issues/8131#issuecomment-1589961116)
