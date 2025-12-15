@@ -1,13 +1,22 @@
-""" 
+"""
 Export Accelerator Timeline
 ***************************
 
-This is an example script to generate static plots of the accelerator data via 
+This is an example script to generate static plots of the accelerator data via
 matplotlib.
-To run the script, make sure your environment has the requirements 
-of `requirements_export_charts.txt` installed.
+To run the script, make sure your environment has the requirements
+of `export_charts` installed,
+e.g. via `uv pip install -r pyproject.toml --extra export_charts`.
+This is automatically resolved when running this script via `uv run export_charts.py`.
 """
-import os
+# sphinx_gallery_start_ignore
+# /// script
+# dependencies = [
+#     "accelerator-timeline[export_charts] @ git+https://github.com/pylhc/accelerator_timeline.git",
+# ]
+# ///
+# sphinx_gallery_end_ignore
+
 from pathlib import Path
 
 import matplotlib as mpl
@@ -18,14 +27,21 @@ from matplotlib import pyplot as plt
 from matplotlib.figure import Figure
 
 from utilities.csv_reader import Column, import_collider_data
-from utilities.plot_helper import (PARTICLE_TYPES, PLOTLY_MPL_SYMBOL_MAP, EnergyConfiguration,
-                                   LuminosityConfiguration, LuminosityOverEnergyConfiguration,
-                                   PlotConfiguration, assign_textposition, check_all_types_accounted_for)
+from utilities.plot_helper import (
+    PARTICLE_TYPES,
+    PLOTLY_MPL_SYMBOL_MAP,
+    EnergyConfiguration,
+    LuminosityConfiguration,
+    LuminosityOverEnergyConfiguration,
+    PlotConfiguration,
+    assign_textposition,
+    check_all_types_accounted_for,
+)
 from utilities.sphinx_helper import get_gallery_dir, is_sphinx_build
 
 
 def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> Figure:
-    """Generate interactive plots with matplotlib, based on the given configuration, 
+    """Generate interactive plots with matplotlib, based on the given configuration,
     which defines the columns to use, labels and the text positions.
 
     Args:
@@ -33,15 +49,15 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> Figure:
         configuration (PlotConfiguration): See :class:`utilities.plot_helper.PlotConfiguration`
 
     Returns:
-        Figure: Matplotlib figure 
+        Figure: Matplotlib figure
     """
     fig, ax = plt.subplots()
-            
+
     pad = mpl.rcParams["lines.markersize"]/3
     vmap = {"top": pad, "middle": 0, "bottom": -pad}
     hmap = {"left": -pad*2, "center": 0, "right": pad*2}
     alignment_map = {
-        "left": "right", "center": "center", "right": "left", 
+        "left": "right", "center": "center", "right": "left",
         "top": "bottom", "middle": "center", "bottom": "top"
     }
 
@@ -56,7 +72,7 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> Figure:
                 builtmask, fillstyle, legend_prefix = ~data[Column.BUILT], "none", "_"
 
             ax.plot(
-                data.loc[mask & builtmask, configuration.xcolumn], 
+                data.loc[mask & builtmask, configuration.xcolumn],
                 data.loc[mask & builtmask, configuration.ycolumn],
                 linestyle="none",
                 marker=marker, fillstyle=fillstyle,
@@ -64,14 +80,14 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> Figure:
                 label=f"{legend_prefix}{particle_type.latex}",
             )
 
-        for x, y, text, textposition in zip(data.loc[mask, configuration.xcolumn], 
-                                            data.loc[mask, configuration.ycolumn], 
-                                            data.loc[mask, Column.NAME], 
+        for x, y, text, textposition in zip(data.loc[mask, configuration.xcolumn],
+                                            data.loc[mask, configuration.ycolumn],
+                                            data.loc[mask, Column.NAME],
                                             data.loc[mask, configuration.textposition]):
             v, h = textposition.split(" ")
-            ax.annotate(text, xy=(x, y),  
-                xytext=(hmap[h], vmap[v]), 
-                textcoords="offset pixels", 
+            ax.annotate(text, xy=(x, y),
+                xytext=(hmap[h], vmap[v]),
+                textcoords="offset pixels",
                 ha=alignment_map[h], va=alignment_map[v]
             )
 
@@ -92,7 +108,7 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> Figure:
 
 
     ax.legend(loc='upper left', bbox_to_anchor=(1, 1), borderaxespad=0., title='Particles', ncol=1)
-    return fig 
+    return fig
 
 
 if __name__ == "__main__":
@@ -108,7 +124,7 @@ if __name__ == "__main__":
     data = import_collider_data()
     data = assign_textposition(data)
     check_all_types_accounted_for(data)
-    
+
     fig_com = plot(data, EnergyConfiguration)
     fig_com.savefig(output_dir / "energy.pdf")
     fig_com.savefig(output_dir / "energy.png")
@@ -120,7 +136,7 @@ if __name__ == "__main__":
     fig_lumi_vs_com = plot(data, LuminosityOverEnergyConfiguration)
     fig_lumi_vs_com.savefig(output_dir / "luminosity-vs-energy.pdf")
     fig_lumi_vs_com.savefig(output_dir / "luminosity-vs-energy.png")
-    
+
     # plt.show()
 
 # sphinx_gallery_thumbnail_path = 'gallery/luminosity-vs-energy.png'

@@ -1,21 +1,11 @@
-# Configuration file for the Sphinx documentation builder.
-#
-# This file only contains a selection of the most common options. For a full
-# list see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
-
-# -- Path setup --------------------------------------------------------------
-
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-
-import pathlib
 import os
+import pathlib
 import shutil
 import sys
 import warnings
+from functools import partial
 
+# -- Filter Warnings -----------------------------------------------------------
 # ignore numpy warnings, see:
 # https://stackoverflow.com/questions/40845304/runtimewarning-numpy-dtype-size-changed-may-indicate-binary-incompatibility
 warnings.filterwarnings("ignore", message="numpy.dtype size changed")
@@ -25,9 +15,17 @@ warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
 warnings.filterwarnings(
     "ignore",
     category=UserWarning,
-    message="Matplotlib is currently using agg, which is a" " non-GUI backend, so cannot show the figure.",
+    message="Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.",
 )
 
+# suppress Sphinx cache-related warnings
+suppress_warnings = ["config.cache"]
+
+# -- Path setup ---------------------------------------------------------------
+
+# If extensions (or modules to document with autodoc) are in another directory,
+# add these directories to sys.path here. If the directory is relative to the
+# documentation root, use os.path.abspath to make it absolute, like shown here.
 
 TOPLEVEL_DIR = pathlib.Path(__file__).parent.parent.absolute()
 ABOUT_FILE = TOPLEVEL_DIR / "__init__.py"
@@ -39,14 +37,16 @@ ABOUT_accelerator_timeline: dict = {}
 with ABOUT_FILE.open("r") as f:
     exec(f.read(), ABOUT_accelerator_timeline)
 
-# Set environment variable for scripts to check if we are in sphinx-mode
-from utilities.sphinx_helper import SPHINX_BUILD_ENVIRON
-os.environ[SPHINX_BUILD_ENVIRON] = '1'
 
+# -- Accelerator Timeline specific setup ---------------------------------------
+# Set environment variable for scripts to check if we are in sphinx-mode
+from utilities.sphinx_helper import SPHINX_BUILD_ENVIRON  # noqa: E402
+
+os.environ[SPHINX_BUILD_ENVIRON] = '1'
 
 # Copy accelerator data file
 shutil.copy2(
-    TOPLEVEL_DIR / "accelerator-parameters.csv", 
+    TOPLEVEL_DIR / "accelerator-parameters.csv",
     TOPLEVEL_DIR / "doc" / "accelerator-parameters.csv"
 )
 
@@ -69,7 +69,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = ABOUT_accelerator_timeline["__title__"]
-copyright_ = '2019-2023, pyLHC/OMC-TEAM'
+copyright_ = '2019-2025, pyLHC/OMC-TEAM'
 author = ABOUT_accelerator_timeline["__author__"]
 
 rst_prolog = f"""
@@ -113,7 +113,7 @@ master_doc = "index"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "docs", "docker", "tests", ".github", ".vscode"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "docs", "docker", "tests", ".github", ".vscode", ".venv"]
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -189,33 +189,29 @@ todo_include_todos = True
 # bibtex_reference_style = "label"
 
 # -- Setup scrapers for the gallery ------------------------------------------
-from plotly.io._sg_scraper import plotly_sg_scraper
-import plotly.io as pio
+import plotly.io as pio  # noqa: E402
+from plotly.io._sg_scraper import plotly_sg_scraper  # noqa: E402
+
 pio.renderers.default = 'sphinx_gallery'
 
 # To use SVG outputs when scraping matplotlib figures for the sphinx-gallery
-from sphinx_gallery.scrapers import matplotlib_scraper
-from sphinx_gallery.sorting import ExampleTitleSortKey
-class matplotlib_svg_scraper(object):
-    def __repr__(self):
-        return self.__class__.__name__
-
-    def __call__(self, *args, **kwargs):
-        return matplotlib_scraper(*args, format="svg", **kwargs)
+from sphinx_gallery.scrapers import matplotlib_scraper  # noqa: E402
+from sphinx_gallery.sorting import ExampleTitleSortKey  # noqa: E402
 
 # Config for the matplotlib plot directive
 plot_formats = [("svg", 250)]
 
 # image_scrapers = (matplotlib_svg_scraper(), plotly_sg_scraper,)
-image_scrapers = (matplotlib_svg_scraper(),)
+image_scrapers = (partial(matplotlib_scraper, format="svg"), plotly_sg_scraper)
 
 # -- Configuration for the sphinx-gallery extension -------------------------------
+
 sphinx_gallery_conf = {
-    "examples_dirs": ["../"],  # directory where to find plotting scripts
+    "examples_dirs": [TOPLEVEL_DIR],  # directory where to find plotting scripts
     "gallery_dirs": ["gallery"],  # directory where to store generated plots
     "filename_pattern": "^((?!sgskip).)*$",  # which files to execute
-    "subsection_order": ExampleTitleSortKey,
-    "within_subsection_order": ExampleTitleSortKey,
+    "subsection_order": ExampleTitleSortKey(TOPLEVEL_DIR),
+    "within_subsection_order": ExampleTitleSortKey(TOPLEVEL_DIR),
     "reference_url": {"accelerator_timeline": None},  # Sets up intersphinx in gallery code
     "backreferences_dir": "gen_modules/backreferences",  # where function/class granular galleries are stored
     # Modules for which function/class level galleries are created
@@ -228,6 +224,7 @@ sphinx_gallery_conf = {
     "compress_images": ("images", "thumbnails", "-o1"),
     "only_warn_on_example_error": True,  # keep the build going if an example fails, very important for doc workflow
     "download_all_examples": False,
+    "ignore_pattern": r"^(tst_|_|\.).*",  # ignore test/private files
 }
 
 # Config for the sphinx_panels extension
@@ -247,8 +244,8 @@ html_theme = "sphinx_rtd_theme"
 # documentation.
 html_theme_options = {
     "collapse_navigation": False,
-    "display_version": True,
     "logo_only": True,
+    "version_selector": True,
     "navigation_depth": 2,
 }
 
@@ -547,7 +544,7 @@ texinfo_documents = [
 # -- Autodoc Configuration ---------------------------------------------------
 
 # Add here all modules to be mocked up. When the dependencies are not met
-# at building time. 
+# at building time.
 autodoc_mock_imports = []
 
 # -- Instersphinx Configuration ----------------------------------------------

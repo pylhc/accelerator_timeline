@@ -1,20 +1,20 @@
 
-""" 
+"""
 Sphinx Helper
 *************
 
 Some functionality to make working with Sphinx easier.
 """
 import os
-from pathlib import Path
 import sys
+from pathlib import Path
 
 SPHINX_BUILD_ENVIRON = "SPHINX_BUILD"
 
 
 def get_gallery_dir() -> Path:
-    """ Get the gallery directory. 
-    
+    """ Get the gallery directory.
+
     Returns:
         Path: Path to the gallery directory.
     """

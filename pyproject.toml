@@ -1,0 +1,136 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "__init__.py"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.github",
+  "/doc",
+  "/images",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["accelerator_timeline"]
+
+[project]
+name = "accelerator_timeline"
+readme = "README.md"
+description = "A non-exhaustive collection of past, modern and future accelerators including their main parameters."
+authors = [
+    {name = "OMC Team", email = "pylhc@github.com"},  # see zenodo file / commits for details
+]
+license = "MIT"
+dynamic = ["version"]
+requires-python = ">=3.10"
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+dependencies = [
+]
+
+[project.optional-dependencies]
+export_charts = [
+    "pandas",
+    "numpy",
+    "matplotlib",
+]
+
+interactive_charts = [
+    "nbformat",
+    "pandas",
+    "plotly",
+    "numpy",
+    "ipython",
+    "ipykernel",
+    "kaleido >= 1.0.0",
+]
+
+doc = [
+    "accelerator_timeline[export_charts]",
+    "accelerator_timeline[interactive_charts]",
+    "sphinx >= 9.0.0",
+    "sphinx_rtd_theme >= 3.1.0rc1",
+    "sphinx-gallery",
+    "sphinx-copybutton",
+]
+
+all = [
+    "accelerator_timeline[doc]",  # contains all dependencies
+]
+
+[project.urls]
+homepage = "https://github.com/pylhc/accelerator_timeline"
+repository = "https://github.com/pylhc/accelerator_timeline"
+documentation = "https://pylhc.github.io/accelerator_timeline/"
+changelog = "https://github.com/pylhc/accelerator_timeline/blob/master/CHANGELOG.md"
+
+
+# ----- Dev Tools Configuration ----- #
+
+[tool.ruff]
+exclude = [
+  ".eggs",
+  ".git",
+  ".mypy_cache",
+  ".venv",
+  "_build",
+  "build",
+  "dist",
+]
+
+# Assume Python 3.10+
+target-version = "py310"
+
+line-length = 100
+indent-width = 4
+
+[tool.ruff.lint]
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+ignore = [
+  "E501",  # line too long
+  "FBT001",  # boolean-type-hint-positional-argument
+  "FBT002",  # boolean-default-value-positional-argument
+  "PT019",  # pytest-fixture-param-without-value (but suggested solution fails)
+]
+extend-select = [
+    "F",        # Pyflakes rules
+    "W",        # PyCodeStyle warnings
+    "E",        # PyCodeStyle errors
+    "I",        # Sort imports properly
+    "A",        # Detect shadowed builtins
+    "N",        # enforce naming conventions, e.g. ClassName vs function_name
+    "UP",       # Warn if certain things can changed due to newer Python versions
+    "C4",       # Catch incorrect use of comprehensions, dict, list, etc
+    "FA",       # Enforce from __future__ import annotations
+    "FBT",      # detect boolean traps
+    "ISC",      # Good use of string concatenation
+    "BLE",      # disallow catch-all exceptions
+    "ICN",      # Use common import conventions
+    "RET",      # Good return practices
+    "SIM",      # Common simplification rules
+    "TID",      # Some good import practices
+    "TC",       # Enforce importing certain types in a TYPE_CHECKING block
+    "PTH",      # Use pathlib instead of os.path
+    "NPY",      # Some numpy-specific things
+]
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []

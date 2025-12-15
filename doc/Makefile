@@ -51,11 +51,6 @@ html:
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
-josch:
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) ../../Documentation/accelerator_timeline-doc
-	@echo
-	@echo "Build finished. The HTML pages are in ../../Documentation/accelerator_timeline-doc."
-
 dirhtml:
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
 	@echo
