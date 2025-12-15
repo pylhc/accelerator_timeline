@@ -205,12 +205,13 @@ plot_formats = [("svg", 250)]
 image_scrapers = (partial(matplotlib_scraper, format="svg"), plotly_sg_scraper)
 
 # -- Configuration for the sphinx-gallery extension -------------------------------
+
 sphinx_gallery_conf = {
-    "examples_dirs": ["../"],  # directory where to find plotting scripts
+    "examples_dirs": [TOPLEVEL_DIR],  # directory where to find plotting scripts
     "gallery_dirs": ["gallery"],  # directory where to store generated plots
     "filename_pattern": "^((?!sgskip).)*$",  # which files to execute
-    "subsection_order": ExampleTitleSortKey("../"),
-    "within_subsection_order": ExampleTitleSortKey("../"),
+    "subsection_order": ExampleTitleSortKey(TOPLEVEL_DIR),
+    "within_subsection_order": ExampleTitleSortKey(TOPLEVEL_DIR),
     "reference_url": {"accelerator_timeline": None},  # Sets up intersphinx in gallery code
     "backreferences_dir": "gen_modules/backreferences",  # where function/class granular galleries are stored
     # Modules for which function/class level galleries are created
