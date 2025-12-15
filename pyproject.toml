@@ -66,7 +66,7 @@ doc = [
     "accelerator_timeline[export_charts]",
     "accelerator_timeline[interactive_charts]",
     "sphinx >= 9.0.0",
-    "sphinx_rtd_theme",
+    "sphinx_rtd_theme >= 3.1.0rc1",
     "sphinx-gallery",
     "sphinx-copybutton",
 ]

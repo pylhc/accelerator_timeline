@@ -69,7 +69,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = ABOUT_accelerator_timeline["__title__"]
-copyright_ = '2019-2023, pyLHC/OMC-TEAM'
+copyright_ = '2019-2025, pyLHC/OMC-TEAM'
 author = ABOUT_accelerator_timeline["__author__"]
 
 rst_prolog = f"""
