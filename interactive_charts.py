@@ -19,6 +19,7 @@ This is automatically resolved when running this script via `uv run interactive_
 # ]
 # ///
 # sphinx_gallery_end_ignore
+
 #%%
 # Preparations
 # ------------
@@ -143,7 +144,7 @@ def plot(data: pd.DataFrame, configuration: PlotConfiguration) -> go.Figure:
         type="log" if "y" in configuration.logscale else "linear",
         ticks='outside',
         dtick=1 if logy else 10,
-        minor=dict(dtick="D1" if logy else None, ticks="outside", showgrid=False),
+        minor={'dtick': "D1" if logy else None, 'ticks': "outside", 'showgrid': False},
         showline=True,
         linecolor='black',
         gridcolor='lightgrey',
@@ -204,6 +205,7 @@ if is_sphinx_build():
     output_dir = get_gallery_dir()
 # sphinx_gallery_end_ignore
 
+output_dir.mkdir(parents=True, exist_ok=True)
 plotly.io.write_image(fig_com, output_dir / "energy-plotly.pdf", format="pdf")
 plotly.io.write_image(fig_com, output_dir / "energy-plotly.png", format="png")
 plotly.io.write_image(fig_lumi, output_dir / "luminosity-plotly.pdf", format="pdf")

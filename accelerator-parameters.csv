@@ -43,8 +43,8 @@ FCC-ee WW,CERN,Switzerland,2043*,,e+e-,80,,2.8E+035,97750,https://journals.aps.o
 FCC-ee ZH,CERN,Switzerland,2045*,,e+e-,120,,8.5E+034,97750,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://doi-org.ezproxy.cern.ch/10.1140/epjst/e2019-900045-4
 FCC-ee ttbar,CERN,Switzerland,2049*,,e+e-,182.5,,1.55E+034,97750,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://doi-org.ezproxy.cern.ch/10.1140/epjst/e2019-900045-4
 FCC-hh,CERN,Switzerland,2070*,,p+p+,50000,,3E+035,97750,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006
-CEPC,IHEP,China,2035*,,e+e-,45.5,,3.2E+035,100000,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://arxiv.org/abs/1809.00285 https://www.researchgate.net/publication/359254433_Snowmass_2021_White_Paper_AF4_-_SPPC
-SppC,IHEP,China,2050*,,p+p+,37500,,1E+035,100000,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://www.researchgate.net/publication/359254433_Snowmass_2021_White_Paper_AF4_-_SPPC
+CEPC,IHEP,China,2035*,,e+e-,45.5,,3.2E+035,100000,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://arxiv.org/abs/1809.00285 https://doi.org/10.48550/arXiv.2203.07987
+SppC,IHEP,China,2050*,,p+p+,37500,,1E+035,100000,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://doi.org/10.48550/arXiv.2203.07987
 ILC v1,Fermilab,USA,2035*,,e+e-,125,,1.35E+034,20500,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://arxiv.org/pdf/1901.09829.pdf
 ILC v2,Fermilab,USA,2040*,,e+e-,250,,1.8E+034,31000,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://arxiv.org/pdf/1901.09829.pdf
 ILC v3,Fermilab,USA,2045*,,e+e-,500,,4.9E+034,40000,https://journals.aps.org/rmp/pdf/10.1103/RevModPhys.93.015006 https://arxiv.org/pdf/1901.09829.pdf

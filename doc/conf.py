@@ -1,15 +1,3 @@
-# Configuration file for the Sphinx documentation builder.
-#
-# This file only contains a selection of the most common options. For a full
-# list see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
-
-# -- Path setup --------------------------------------------------------------
-
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-
 import os
 import pathlib
 import shutil
@@ -17,6 +5,7 @@ import sys
 import warnings
 from functools import partial
 
+# -- Filter Warnings -----------------------------------------------------------
 # ignore numpy warnings, see:
 # https://stackoverflow.com/questions/40845304/runtimewarning-numpy-dtype-size-changed-may-indicate-binary-incompatibility
 warnings.filterwarnings("ignore", message="numpy.dtype size changed")
@@ -29,6 +18,14 @@ warnings.filterwarnings(
     message="Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.",
 )
 
+# suppress Sphinx cache-related warnings
+suppress_warnings = ["config.cache"]
+
+# -- Path setup ---------------------------------------------------------------
+
+# If extensions (or modules to document with autodoc) are in another directory,
+# add these directories to sys.path here. If the directory is relative to the
+# documentation root, use os.path.abspath to make it absolute, like shown here.
 
 TOPLEVEL_DIR = pathlib.Path(__file__).parent.parent.absolute()
 ABOUT_FILE = TOPLEVEL_DIR / "__init__.py"
@@ -40,11 +37,12 @@ ABOUT_accelerator_timeline: dict = {}
 with ABOUT_FILE.open("r") as f:
     exec(f.read(), ABOUT_accelerator_timeline)
 
+
+# -- Accelerator Timeline specific setup ---------------------------------------
 # Set environment variable for scripts to check if we are in sphinx-mode
 from utilities.sphinx_helper import SPHINX_BUILD_ENVIRON  # noqa: E402
 
 os.environ[SPHINX_BUILD_ENVIRON] = '1'
-
 
 # Copy accelerator data file
 shutil.copy2(
@@ -115,7 +113,7 @@ master_doc = "index"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "docs", "docker", "tests", ".github", ".vscode"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "docs", "docker", "tests", ".github", ".vscode", ".venv"]
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -225,7 +223,7 @@ sphinx_gallery_conf = {
     "compress_images": ("images", "thumbnails", "-o1"),
     "only_warn_on_example_error": True,  # keep the build going if an example fails, very important for doc workflow
     "download_all_examples": False,
-    "ignore_pattern": r"(^tst_.*|^_.*)",  # ignore test/private files
+    "ignore_pattern": r"^(tst_|_|\.).*",  # ignore test/private files
 }
 
 # Config for the sphinx_panels extension
