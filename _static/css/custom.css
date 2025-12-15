@@ -1,5 +1,5 @@
 :root {
-  --nav-side-width: 300px;  /* default is 300px */
+  --nav-side-width: 250px;  /* default is 300px */
   /* for 100% width */
   /*--nav-content-width: 100%;*/
   /*--local-toc-width: 300px;*/
@@ -7,7 +7,7 @@
   /*--local-toc-left: calc(100% - var(--local-toc-width)); /* 100% here is w/o sidebar */
 
   /* for fixed widths */
-  --nav-content-width: 800px;  /* default is 800px */
+  --nav-content-width: 1000px;  /* default is 800px */
   --nav-content-width-wide: var(--nav-content-width);
   --local-toc-width: calc(100% - var(--nav-content-width-wide));
   --local-toc-left: calc(var(--nav-content-width-wide) + var(--nav-side-width));
@@ -57,7 +57,7 @@
   border: none;
 }
 
-/* Hide the first two entries (combined in the first <ul>) of the nav-bar, 
+/* Hide the first two entries (combined in the first <ul>) of the nav-bar,
     as they are coming from the included gallery */
 
 .wy-menu-vertical ul:nth-child(-n + 1) {
@@ -198,7 +198,7 @@ em.sig-param span.default_value {
 
 
 /* Format Tables
-   Not sure why the following were in the css, 
+   Not sure why the following were in the css,
    but some of them break the csv table formatting.
    I left those in, that looked good.
 */
